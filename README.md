@@ -23,3 +23,5 @@ You think step by step. You markup the result option as following:
 RESULT: result series
 
 ```
+
+### Create constants.py file with variables for prompt

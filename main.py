@@ -83,6 +83,7 @@ def get_test_prompt(prompt: str, llm_model: str, temperature: str) -> dict:
     for index, testcase in enumerate(testcases):
         for sentence in str(testcase[0].content).split("\n"):
             if sentence.startswith("RESULT:"):
+                result += f"\t\t\t\n"
                 result += f"\t\t\tTESTCASE-{index + 1}:\n"
                 result += "LLM RESPONSE: " + sentence + "\n\n"
                 result += "Expected RESPONSE: " + testcase[1] + "\n\n\n\n"
