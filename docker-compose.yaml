@@ -8,5 +8,5 @@ services:
          [
            "streamlit",
            "run",
-           "app.py",
+           "src/app.py",
          ]

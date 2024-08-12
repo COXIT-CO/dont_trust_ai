@@ -1,4 +1,4 @@
-from src.config import client
+from config import client
 
 
 async def llm_call(

@@ -1,6 +1,6 @@
 import asyncio
-from src.config import DEFAULT_LLM_MODEL, CSV_FILE_PATH
-from src.constants import (
+from config import DEFAULT_LLM_MODEL, CSV_FILE_PATH
+from constants import (
     OPTIONS,
     INSTRUCTION,
     PROMPT,
