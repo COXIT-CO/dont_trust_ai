@@ -1,10 +1,12 @@
 ## HOW TO RUN:
-
+1. Create constants.py file with variables for prompt
+2. Create .env file with variables for prompt
+3. Add testcases.csv file with data
 ```
-python -m venv .venv
-.venv\Scripts\activate 
-streamlit run app.py
+docker-compose up --build
 ```
-And then enter your LMM settings and prompt
+App is running on http://localhost:8501/
 
-### Create constants.py file with variables for prompt
+## And then enter your LMM settings and prompt
+
+

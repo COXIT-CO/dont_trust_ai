@@ -1,6 +1,6 @@
 import asyncio
-from config import DEFAULT_LLM_MODEL, CSV_FILE_PATH
-from constants import (
+from src.config import DEFAULT_LLM_MODEL, CSV_FILE_PATH
+from src.constants import (
     OPTIONS,
     INSTRUCTION,
     PROMPT,
@@ -105,7 +105,7 @@ if __name__ == "__main__":
         (INPUT_TEXT_8, "RESULT: 1250 Series"),
         (INPUT_TEXT_9, "RESULT: 2100-C"),
     ]
-    csv_file_path = "testcases.csv"
+    csv_file_path = "../testcases.csv"
     write_tuples_to_csv(csv_file_path, tuples_list)
     print(f"Data written to {csv_file_path}")
 
