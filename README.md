@@ -66,6 +66,7 @@
 
 ### 3. Create .env file with:
 1. <b>OPENROUTER_API_KEY</b>
+<br>
 Description: This key is used to authenticate API requests to the OpenRouter service. 
 It is essential for interacting with the OpenRouter API.
 ```
