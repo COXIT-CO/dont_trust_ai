@@ -1,18 +1,34 @@
+import logging
 import os
+import pytz
+from datetime import datetime
 from openai import AsyncOpenAI
 from dotenv import load_dotenv
-
 
 load_dotenv()
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-DEFAULT_LLM_MODEL = os.getenv("DEFAULT_LLM_MODEL")
-DEFAULT_LLM_TEMPERATURE = os.getenv("DEFAULT_LLM_TEMPERATURE")
-CSV_FILE_PATH = os.getenv("CSV_FILE_PATH")
+OPENROUTER_BASE_URL = os.getenv("OPENROUTER_BASE_URL")
+OPENROUTER_DEFAULT_LLM_MODELS = os.getenv("OPENROUTER_DEFAULT_LLM_MODELS").split(",")
 
+PATH_TO_TESTCASES_CSV_FILE = os.getenv("PATH_TO_TESTCASES_CSV_FILE")
+PATH_TO_PROMPT_CSV_FILE = os.getenv("PATH_TO_PROMPT_CSV_FILE")
+
+TIMEZONE_REGION = os.getenv("TIMEZONE_REGION")
 
 client = AsyncOpenAI(
-  base_url="https://openrouter.ai/api/v1",
-  api_key=OPENROUTER_API_KEY,
+    base_url=OPENROUTER_BASE_URL,
+    api_key=OPENROUTER_API_KEY,
 )
 
+TIMEZONE = pytz.timezone(TIMEZONE_REGION)
+
+os.makedirs("results", exist_ok=True)
+os.makedirs("logs", exist_ok=True)
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    filename=f"logs/{datetime.now(TIMEZONE).strftime('%Y_%m_%d_%H:%M:%S')}",
+    datefmt="%m/%d/%Y %I:%M:%S %p",
+)
