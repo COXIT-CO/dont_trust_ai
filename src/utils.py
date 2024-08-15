@@ -1,57 +1,96 @@
 import csv
-from difflib import SequenceMatcher
+import datetime
+from config import TIMEZONE, logging
 
 
-def read_csv_to_tuples(file_path):
+def read_testcases_from_csv(file_path) -> list:
     """
-    Reads a CSV file and returns a list of tuples (specification, expected_result).
+    Reads a CSV file and returns a list of tuples (index, label, specification).
 
     Args:
         file_path (str): Path to the CSV file.
 
     Returns:
-        list: List of tuples (specification, expected_result).
+        list: List of tuples (index, label, specification).
+    """
+    result = []
+
+    try:
+        with open(file_path, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                index, label, specification = row
+                result.append((index.strip(), specification.strip(), label.strip()))
+    except FileNotFoundError:
+        logging.exception(f"File '{file_path}' not found.")
+    return result[1:]
+
+
+def read_prompts_from_csv(file_path) -> list:
+    """
+    Reads a CSV file and returns a list of tuples (number, prompt_template, options, instruction).
+
+    Args:
+        file_path (str): Path to the CSV file.
+
+    Returns:
+        list: List of tuples (number, prompt_template, options, instruction).
     """
     result = []
     try:
         with open(file_path, 'r') as csvfile:
-            reader = csv.reader(csvfile, delimiter='|')
+            reader = csv.reader(csvfile)
             for row in reader:
-                specification, expected_result = row
-                result.append((specification.strip(), expected_result.strip()))
+                number, prompt_template, options, instruction = row
+                result.append((number.strip(), prompt_template.strip(), options.strip(), instruction.strip()))
     except FileNotFoundError:
-        print(f"File '{file_path}' not found.")
-        for r in result:
-            print(r)
-    return result
+        logging.exception(f"File '{file_path}' not found.")
+    return result[1:]
 
-def write_tuples_to_csv(file_path, data):
+
+def save_response_to_csv(data: list[tuple]):
     """
-    Writes a list of tuples (specification, expected_result) to a CSV file with '|' as the delimiter.
+    Writes a list of tuples to a CSV file.
 
     Args:
-        file_path (str): Path to the CSV file.
-        data (list): List of tuples (specification, expected_result).
+        data (list): List of tuples (
+            ('Test Number', 'Expected Label', 'LLM Result', 'LLM Step by Step Reasoning', 'LLM', 'Prompt Number')
+        ).
     """
+
+    now = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d-%H:%M:%S')
     try:
-        with open(file_path, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter='|')
-            for item in data:
-                writer.writerow(item)
+        with open(f"results/{now}.csv", 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(
+                ['Test Number', 'Expected Label', 'LLM Result', 'LLM Step by Step Reasoning', 'LLM', 'Prompt Number'])
+            for row in data:
+                writer.writerow(row)
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logging.exception(f"An error occurred: {e}")
 
 
-def similarity_percentage(sentence1, sentence2):
+def get_result_word(expected: str, obtained: str):
     """
-    Calculates the similarity percentage between two sentences.
-
-    Args:
-        sentence1 (str): The first sentence.
-        sentence2 (str): The second sentence.
-
-    Returns:
-        float: Similarity percentage between the two sentences.
+    Compare if expected sentence is in obtained
+    and return the result word in Streamlit format
     """
-    matcher = SequenceMatcher(None, sentence1, sentence2)
-    return round(matcher.ratio() * 100, 2)
+    if expected in obtained:
+        return ":green[success]"
+    return ":red[failed]"
+
+
+def get_prompts_config(file_path: str):
+    """
+    Create prompts config dictionary from CSV file.
+    """
+    prompts_config_tuples = read_prompts_from_csv(file_path)
+    prompts_config = {
+        number: {
+            "prompt_template": prompt_template,
+            "options": options,
+            "instruction": instruction,
+        }
+        for number, prompt_template, options, instruction in prompts_config_tuples
+    }
+    return prompts_config
