@@ -30,16 +30,17 @@ async def test_prompt(
     long_result = ""
     result_testing_tuples = []
 
-    for index, testcase in enumerate(testcase_results):
-        result_from_llm = testcase[0]
+    for testcase in testcase_results:
+        index = testcase[0][0]
+        result_from_llm = testcase[0][1]
         expected_result = testcase[1]
         long_result += f"-\n"
-        long_result += f"\t\t\tTESTCASE-{index + 1}:\n"
+        long_result += f"\t\t\tTESTCASE-{index}:\n"
         for sentence in str(result_from_llm).split("\n"):
             if "RESULT" in sentence:
                 result_testing_tuples.append(
                     (
-                        index + 1,
+                        index,
                         expected_result,
                         sentence.replace("RESULT:", "").strip(),
                         result_from_llm,
@@ -48,7 +49,7 @@ async def test_prompt(
                     )
                 )
                 short_result += f"-\n"
-                short_result += f"\t\t\tTESTCASE-{index + 1}: " + expected_result + "\n"
+                short_result += f"\t\t\tTESTCASE-{index}: " + expected_result + "\n"
                 short_result += f"LLM RESPONSE: " + sentence + "\n\n"
                 short_result += "Result: **" + get_result_word(expected_result, sentence) + "**\n\n\n\n"
             long_result += f"{sentence}\n\n"
