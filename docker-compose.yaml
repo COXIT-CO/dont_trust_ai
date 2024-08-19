@@ -3,6 +3,7 @@ services:
        build:
          context: .
        volumes:
+         - ./inputs:/app/inputs
          - ./logs:/app/logs
          - ./results:/app/results
        ports:
@@ -17,3 +18,4 @@ services:
 volumes:
   logs:
   results:
+  inputs:
