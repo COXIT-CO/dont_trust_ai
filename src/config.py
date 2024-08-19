@@ -16,11 +16,6 @@ PATH_TO_PROMPT_CSV_FILE = os.getenv("PATH_TO_PROMPT_CSV_FILE")
 
 TIMEZONE_REGION = os.getenv("TIMEZONE_REGION")
 
-client = AsyncOpenAI(
-    base_url=OPENROUTER_BASE_URL,
-    api_key=OPENROUTER_API_KEY,
-)
-
 TIMEZONE = pytz.timezone(TIMEZONE_REGION)
 
 os.makedirs("results", exist_ok=True)
@@ -32,3 +27,10 @@ logging.basicConfig(
     filename=f"logs/{datetime.now(TIMEZONE).strftime('%Y_%m_%d_%H:%M:%S')}",
     datefmt="%m/%d/%Y %I:%M:%S %p",
 )
+
+
+def get_client() -> AsyncOpenAI:
+    return AsyncOpenAI(
+        base_url=OPENROUTER_BASE_URL,
+        api_key=OPENROUTER_API_KEY,
+    )
