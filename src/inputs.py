@@ -1,6 +1,5 @@
-from config import PATH_TO_PROMPT_CSV_FILE, PATH_TO_TESTCASES_CSV_FILE
-from utils import get_prompts_config, read_testcases_from_csv
+from config import PATH_TO_TESTCASES_CSV_FILE
+from utils import read_testcases_from_csv
 
-PROMPTS_CONFIG = get_prompts_config(PATH_TO_PROMPT_CSV_FILE)
 
 TESTCASES_LIST = read_testcases_from_csv(PATH_TO_TESTCASES_CSV_FILE)
