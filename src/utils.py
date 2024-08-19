@@ -16,7 +16,7 @@ def read_testcases_from_csv(file_path) -> list:
     result = []
 
     try:
-        with open(file_path, 'r') as csvfile:
+        with open(file_path, "r") as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
                 index, label, specification = row
@@ -38,11 +38,18 @@ def read_prompts_from_csv(file_path) -> list:
     """
     result = []
     try:
-        with open(file_path, 'r') as csvfile:
+        with open(file_path, "r") as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
                 number, prompt_template, options, instruction = row
-                result.append((number.strip(), prompt_template.strip(), options.strip(), instruction.strip()))
+                result.append(
+                    (
+                        number.strip(),
+                        prompt_template.strip(),
+                        options.strip(),
+                        instruction.strip(),
+                    )
+                )
     except FileNotFoundError:
         logging.exception(f"File '{file_path}' not found.")
     return result[1:]
@@ -58,12 +65,23 @@ def save_response_to_csv(data: list[tuple]):
         ).
     """
 
-    now = datetime.datetime.now(TIMEZONE).strftime('%Y-%m-%d-%H:%M:%S')
+    now = datetime.datetime.now(TIMEZONE).strftime("%Y-%m-%d-%H:%M:%S")
     try:
-        with open(f"results/{now}.csv", 'w', newline='') as csvfile:
+        with open(f"results/{now}.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(
-                ['Test Number', 'Expected Label', 'LLM Result', 'LLM Step by Step Reasoning', 'LLM', 'Prompt Number'])
+                [
+                    "Test Number",
+                    "Expected Label",
+                    "LLM Result",
+                    "LLM Step by Step Reasoning",
+                    "LLM",
+                    "Prompt Number",
+                    "Prompt Template",
+                    "OPTIONS",
+                    "INSTRUCTION",
+                ]
+            )
             for row in data:
                 writer.writerow(row)
     except Exception as e:
