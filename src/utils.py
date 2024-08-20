@@ -20,7 +20,7 @@ def read_testcases_from_csv(file_path) -> list:
             reader = csv.reader(csvfile)
             for row in reader:
                 index, label, specification = row
-                result.append((index.strip(), specification.strip(), label.strip()))
+                result.append((index.strip(), label.strip(), specification.strip()))
     except FileNotFoundError:
         logging.exception(f"File '{file_path}' not found.")
     return result[1:]
@@ -78,8 +78,8 @@ def save_response_to_csv(data: list[tuple]):
                     "LLM",
                     "Prompt Number",
                     "Prompt Template",
-                    "OPTIONS",
                     "INSTRUCTION",
+                    "OPTIONS",
                 ]
             )
             for row in data:

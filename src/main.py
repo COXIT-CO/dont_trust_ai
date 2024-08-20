@@ -52,8 +52,8 @@ async def test_prompt(
                         llm_model,
                         prompt_number,
                         prompt_template,
-                        prompt_options,
                         prompt_instruction,
+                        prompt_options,
                     )
                 )
                 short_result += f"-\n"
