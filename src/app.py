@@ -81,7 +81,7 @@ def main():
         )
 
     st.header("Testcases")
-    for index, specification, expected_result in TESTCASES_LIST:
+    for index, expected_result, specification in TESTCASES_LIST:
         st.text_area(f"Testcase-{index}: ", value=specification, height=350)
         st.text_area(f"Expected Result-{index}: ", value=expected_result, height=30)
 

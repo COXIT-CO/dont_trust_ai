@@ -15,7 +15,7 @@ async def test_prompt(
     expected_results = []
     llm_ainvokes = []
 
-    for index, specification, expected_result in testcases:
+    for index, expected_result, specification in testcases:
         llm_invoke = llm_call(
             llm_model=llm_model,
             index_of_testcase=index,
