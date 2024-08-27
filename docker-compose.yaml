@@ -1,0 +1,21 @@
+services:
+     app:
+       build:
+         context: .
+       volumes:
+         - ./inputs:/app/inputs
+         - ./logs:/app/logs
+         - ./results:/app/results
+       ports:
+         - "8501:8501"
+       command:
+         [
+           "streamlit",
+           "run",
+           "src/app.py",
+         ]
+
+volumes:
+  logs:
+  results:
+  inputs:

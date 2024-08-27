@@ -1,0 +1,5 @@
+from config import PATH_TO_TESTCASES_CSV_FILE
+from utils import read_testcases_from_csv
+
+
+TESTCASES_LIST = read_testcases_from_csv(PATH_TO_TESTCASES_CSV_FILE)
