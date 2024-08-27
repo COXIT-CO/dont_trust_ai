@@ -10,7 +10,7 @@ async def test_prompt(
     prompt_options: str,
     llm_model: str,
     testcases: list[tuple[str, str]]
-) -> tuple[str, str]:
+) -> tuple[str, str, int]:
 
     expected_results = []
     llm_ainvokes = []
@@ -34,6 +34,7 @@ async def test_prompt(
     short_result = ""
     long_result = ""
     result_testing_tuples = []
+    passed_testcases = 0
 
     for testcase in testcase_results:
         index = testcase[0][0]
@@ -49,23 +50,26 @@ async def test_prompt(
                         expected_result,
                         sentence.replace("RESULT:", "").strip(),
                         result_from_llm,
-                        llm_model,
-                        prompt_number,
                         prompt_template,
                         prompt_instruction,
                         prompt_options,
+                        llm_model,
+                        prompt_number,
                     )
                 )
+                state_of_result = get_result_word(expected_result, sentence)
+                if state_of_result == ":green[success]":
+                    passed_testcases += 1
                 short_result += f"-\n"
                 short_result += f"\t\t\tTESTCASE-{index}: " + expected_result + "\n"
                 short_result += f"LLM RESPONSE: " + sentence + "\n\n"
                 short_result += (
                     "Result: **"
-                    + get_result_word(expected_result, sentence)
+                    + state_of_result
                     + "**\n\n\n\n"
                 )
+
             long_result += f"{sentence}\n\n"
         long_result += "Expected RESPONSE: **" + expected_result + "**\n\n\n\n"
-
     save_response_to_csv(result_testing_tuples)
-    return short_result, long_result
+    return short_result, long_result, passed_testcases

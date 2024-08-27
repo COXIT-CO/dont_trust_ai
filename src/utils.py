@@ -75,11 +75,11 @@ def save_response_to_csv(data: list[tuple]):
                     "Expected Label",
                     "LLM Result",
                     "LLM Step by Step Reasoning",
-                    "LLM",
-                    "Prompt Number",
                     "Prompt Template",
                     "INSTRUCTION",
                     "OPTIONS",
+                    "LLM",
+                    "Prompt Number",
                 ]
             )
             for row in data:

@@ -41,7 +41,7 @@ def main():
             prompt_options = st.session_state.get(f"options-{selected_prompt_number}")
 
             with st.spinner("Fetching data..."):
-                short_response, long_response = async_get_test(
+                short_response, long_response, passed_testcases = async_get_test(
                     prompt_number=selected_prompt_number,
                     prompt_template=prompt_template,
                     prompt_instruction=prompt_instruction,
@@ -49,7 +49,8 @@ def main():
                     llm_model=selected_llm,
                     testcases=selected_testcases,
                 )
-            st.subheader("Short Result: ")
+            failed_testcases = len(selected_testcases) - passed_testcases
+            st.subheader(f"Short Result: :green[{passed_testcases} passed], :red[{failed_testcases} failed]")
             st.write(short_response)
             st.markdown(
                 "<hr style='border:3px dashed black;margin:20px 0;'>",
