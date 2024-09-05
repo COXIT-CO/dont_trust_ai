@@ -29,6 +29,10 @@ def read_testcases_from_csv(file_path) -> list:
         raise FileNotFoundError(f"File not found in path: {file_path}")
     return result[1:]
 
+
+GPT_ACCURACY = 0.7
+CLAUDE_ACCURACY = 0.8
+
 OPENROUTER_BASE_URL = os.environ["OPENROUTER_BASE_URL"]
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
 OPTIONS = os.environ["OPTIONS"]
@@ -84,9 +88,9 @@ class PromptTests(unittest.TestCase):
                             )
 
         self.assertGreaterEqual(
-            match_count,
-            7,
-            f"The match occurred only {match_count} times out of 9 \n{failed_testcases}",
+            round(match_count / len(self.testcases), 2),
+            GPT_ACCURACY,
+            f"The match occurred only {match_count} times out of {len(self.testcases)} \n{failed_testcases}",
         )
 
     def test_claude_prompt(self):
@@ -127,19 +131,18 @@ class PromptTests(unittest.TestCase):
                 for sentence in str(llm_response).split("\n"):
                     if "RESULT" in sentence:
                         if expected_result in sentence:
-                            print(f"Testcase-{index_of_testcase}: PASSED")
                             match_count += 1
                         else:
                             failed_testcases += (
-                                f"Testcase-{index_of_testcase}: "
+                                f"\nTestcase-{index_of_testcase}: "
                                 f"Expected: {expected_result}\n"
-                                f"LLM: {sentence}"
+                                f"LLM: {sentence}\nT"
                             )
 
         self.assertGreaterEqual(
-            match_count,
-            8,
-            f"The match occurred only {match_count} times out of 9 \n{failed_testcases}",
+            round(match_count / len(self.testcases), 2),
+            CLAUDE_ACCURACY,
+            f"The match occurred only {match_count} times out of {len(self.testcases)} \n{failed_testcases}",
         )
 
 
