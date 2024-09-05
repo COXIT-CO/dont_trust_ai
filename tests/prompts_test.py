@@ -75,13 +75,12 @@ class PromptTests(unittest.TestCase):
                 for sentence in str(llm_response).split("\n"):
                     if "RESULT" in sentence:
                         if expected_result in sentence:
-                            print(f"Testcase-{index_of_testcase}: PASSED")
                             match_count += 1
                         else:
                             failed_testcases += (
-                                f"Testcase-{index_of_testcase}: "
+                                f"\nTestcase-{index_of_testcase}: "
                                 f"Expected: {expected_result}\n"
-                                f"LLM: {sentence}"
+                                f"LLM: {sentence}\n"
                             )
 
         self.assertGreaterEqual(
