@@ -26,7 +26,7 @@ def read_testcases_from_csv(file_path) -> list:
                 index, label, specification = row
                 result.append((index.strip(), label.strip(), specification.strip()))
     except FileNotFoundError:
-        raise FileNotFoundError("File not found")
+        raise FileNotFoundError(f"File not found in path: {file_path}")
     return result[1:]
 
 OPENROUTER_BASE_URL = os.environ["OPENROUTER_BASE_URL"]
@@ -41,7 +41,7 @@ class PromptTests(unittest.TestCase):
     def setUp(self):
         self.claude_llm = "anthropic/claude-3.5-sonnet-2024-06-20"
         self.gpt_llm = "openai/gpt-4o"
-        self.testcases = read_testcases_from_csv("testcases.csv")
+        self.testcases = read_testcases_from_csv("tests/testcases.csv")
         self.gpt_prompt_template = os.environ["GPT_PROMPT"]
         self.claude_prompt_template = os.environ["CLAUDE_PROMPT"]
 
