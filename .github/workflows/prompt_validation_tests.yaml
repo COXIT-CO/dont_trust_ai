@@ -13,6 +13,14 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     environment: OPTIONS
+    env:
+      CLAUDE_INSTRUCTIONS: ${{ secrets.CLAUDE_INSTRUCTIONS }}
+      CLAUDE_PROMPT: ${{ secrets.CLAUDE_PROMPT }}
+      GPT_PROMPT: ${{ secrets.GPT_PROMPT }}
+      INSTRUCTIONS_GPT: ${{ secrets.INSTRUCTIONS_GPT }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      OPENROUTER_BASE_URL: ${{ secrets.OPENROUTER_BASE_URL }}
+      OPTIONS: ${{ secrets.OPTIONS }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
