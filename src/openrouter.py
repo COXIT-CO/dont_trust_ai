@@ -20,12 +20,23 @@ async def llm_call(
         completion = await client.chat.completions.create(
             model=llm_model,
             temperature=0,
+            top_p=0,
+            seed=9999,
+            max_tokens=1000,
             messages=[
                 {
                     "role": "system",
                     "content": prompt_template.format(
-                        OPTIONS=options, INSTRUCTION=instruction, INPUT_TEXT=input_text
+                        OPTIONS=options
                     ),
+                },
+                {
+                    "role": "assistant",
+                    "content": f"<instuctions>{instruction}</instuctions>",
+                },
+                {
+                    "role": "user",
+                    "content": f"<specification>{input_text}</specification>",
                 },
             ],
         )
