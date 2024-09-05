@@ -3,7 +3,6 @@ import os
 import unittest
 from openai import OpenAI
 from dotenv import load_dotenv
-from src.config import OPENROUTER_BASE_URL, OPENROUTER_API_KEY
 
 load_dotenv()
 
@@ -30,7 +29,8 @@ def read_testcases_from_csv(file_path) -> list:
         raise FileNotFoundError("File not found")
     return result[1:]
 
-
+OPENROUTER_BASE_URL = os.environ["OPENROUTER_BASE_URL"]
+OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
 OPTIONS = os.environ["OPTIONS"]
 INSTRUCTIONS_GPT = os.environ["INSTRUCTIONS_GPT"]
 CLAUDE_INSTRUCTIONS = os.environ["CLAUDE_INSTRUCTIONS"]
@@ -49,8 +49,8 @@ class PromptTests(unittest.TestCase):
         match_count = 0
         failed_testcases = ""
         client = OpenAI(
-            base_url=os.environ["OPENROUTER_BASE_URL"],
-            api_key=os.environ["OPENROUTER_API_KEY"],
+            base_url=OPENROUTER_BASE_URL,
+            api_key=OPENROUTER_API_KEY,
         )
         for index_of_testcase, expected_result, specification in self.testcases:
             with self.subTest(i=index_of_testcase):  # subTest for every llm call
