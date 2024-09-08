@@ -82,20 +82,20 @@ class PromptTests(unittest.TestCase):
                             if expected_result in sentence:
                                 match_count += 1
                                 print(
-                                    f"Circle-{index_of_circle}"
+                                    f"Circle-{index_of_circle} "
                                     f"GPT: Test-{index_of_testcase} PASSED"
                                 )
 
                             else:
                                 failed_testcases += (
-                                    f"\nCircle-{index_of_circle}"
+                                    f"\nCircle-{index_of_circle} "
                                     f"Testcase-{index_of_testcase}: "
-                                    f"Expected: {expected_result}"
+                                    f"Expected: {expected_result} "
                                     f"LLM: {sentence}\n\n"
                                 )
                                 print(
-                                    f"Circle-{index_of_circle}"
-                                    f"GPT: Test-{index_of_testcase} FAILED:"
+                                    f"Circle-{index_of_circle} "
+                                    f"GPT: Test-{index_of_testcase} FAILED: "
                                     f"Result: {sentence}\n"
                                 )
 
@@ -142,19 +142,19 @@ class PromptTests(unittest.TestCase):
                             if expected_result in sentence:
                                 match_count += 1
                                 print(
-                                    f"Circle-{index_of_circle}"
+                                    f"Circle-{index_of_circle} "
                                     f"Claude: Test-{index_of_testcase} PASSED"
                                 )
                             else:
                                 failed_testcases += (
-                                    f"\nCircle-{index_of_circle}"
+                                    f"\nCircle-{index_of_circle} "
                                     f"Testcase-{index_of_testcase}: "
-                                    f"Expected: {expected_result}"
+                                    f"Expected: {expected_result} "
                                     f"LLM: {sentence}\n\n"
                                 )
                                 print(
-                                    f"Circle-{index_of_circle}"
-                                    f"Claude: Test-{index_of_testcase} FAILED:"
+                                    f"Circle-{index_of_circle} "
+                                    f"Claude: Test-{index_of_testcase} FAILED: "
                                     f"Result: {sentence}\n"
                                 )
 
