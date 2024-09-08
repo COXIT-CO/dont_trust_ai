@@ -32,6 +32,7 @@ def read_testcases_from_csv(file_path) -> list:
 
 GPT_ACCURACY = 0.7
 CLAUDE_ACCURACY = 0.8
+RETRY_COUNT = 1
 
 OPENROUTER_BASE_URL = os.environ["OPENROUTER_BASE_URL"]
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
@@ -56,41 +57,53 @@ class PromptTests(unittest.TestCase):
             base_url=OPENROUTER_BASE_URL,
             api_key=OPENROUTER_API_KEY,
         )
-        for index_of_testcase, expected_result, specification in self.testcases:
-            with self.subTest(i=index_of_testcase):  # subTest for every llm call
-                completion = client.chat.completions.create(
-                    model=self.gpt_llm,
-                    temperature=0,
-                    top_p=0,
-                    seed=111,
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": self.gpt_prompt_template.format(
-                                OPTIONS=OPTIONS,
-                                INSTRUCTION=INSTRUCTIONS_GPT,
-                                INPUT_TEXT=specification,
-                            ),
-                        },
-                    ],
-                )
-                llm_response = completion.choices[0].message.content
+        for index_of_circle in range(RETRY_COUNT):
+            for index_of_testcase, expected_result, specification in self.testcases:
+                with self.subTest(i=index_of_testcase):  # subTest for every llm call
+                    completion = client.chat.completions.create(
+                        model=self.gpt_llm,
+                        temperature=0,
+                        seed=111,
+                        messages=[
+                            {
+                                "role": "system",
+                                "content": self.gpt_prompt_template.format(
+                                    OPTIONS=OPTIONS,
+                                    INSTRUCTION=INSTRUCTIONS_GPT,
+                                    INPUT_TEXT=specification,
+                                ),
+                            },
+                        ],
+                    )
+                    llm_response = completion.choices[0].message.content
 
-                for sentence in str(llm_response).split("\n"):
-                    if "RESULT" in sentence:
-                        if expected_result in sentence:
-                            match_count += 1
-                        else:
-                            failed_testcases += (
-                                f"\nTestcase-{index_of_testcase}: "
-                                f"Expected: {expected_result}\n"
-                                f"LLM: {sentence}\n"
-                            )
+                    for sentence in str(llm_response).split("\n"):
+                        if "RESULT" in sentence:
+                            if expected_result in sentence:
+                                match_count += 1
+                                print(
+                                    f"Circle-{index_of_circle}"
+                                    f"GPT: Test-{index_of_testcase} PASSED"
+                                )
+
+                            else:
+                                failed_testcases += (
+                                    f"\nCircle-{index_of_circle}"
+                                    f"Testcase-{index_of_testcase}: "
+                                    f"Expected: {expected_result}"
+                                    f"LLM: {sentence}\n\n"
+                                )
+                                print(
+                                    f"Circle-{index_of_circle}"
+                                    f"GPT: Test-{index_of_testcase} FAILED:"
+                                    f"Result: {sentence}\n"
+                                )
 
         self.assertGreaterEqual(
-            round(match_count / len(self.testcases), 2),
+            round(match_count / len(self.testcases) * RETRY_COUNT, 2),
             GPT_ACCURACY,
-            f"The match occurred only {match_count} times out of {len(self.testcases)} \n{failed_testcases}",
+            f"The match occurred only {match_count} "
+            f"times out of {len(self.testcases) * RETRY_COUNT} \n{failed_testcases}",
         )
 
     def test_claude_prompt(self):
@@ -100,49 +113,56 @@ class PromptTests(unittest.TestCase):
             base_url=OPENROUTER_BASE_URL,
             api_key=OPENROUTER_API_KEY,
         )
-        for index_of_testcase, expected_result, specification in self.testcases:
-            with self.subTest(i=index_of_testcase):  # subTest for every llm call
-                completion = client.chat.completions.create(
-                    model=self.claude_llm,
-                    temperature=0,
-                    top_p=0,
-                    seed=9999,
-                    max_tokens=1000,
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": self.claude_prompt_template.format(
-                                OPTIONS=OPTIONS
-                            ),
-                        },
-                        {
-                            "role": "assistant",
-                            "content": f"<instuctions>{CLAUDE_INSTRUCTIONS}</instuctions>",
-                        },
-                        {
-                            "role": "user",
-                            "content": f"<specification>{specification}</specification>",
-                        },
-                    ],
-                )
+        for index_of_circle in range(RETRY_COUNT):
+            for index_of_testcase, expected_result, specification in self.testcases:
+                with self.subTest(i=index_of_testcase):  # subTest for every llm call
+                    completion = client.chat.completions.create(
+                        model=self.claude_llm,
+                        temperature=0,
+                        seed=9999,
+                        max_tokens=1000,
+                        messages=[
+                            {
+                                "role": "system",
+                                "content": self.claude_prompt_template.format(
+                                    OPTIONS=OPTIONS, INSTRUCTION=CLAUDE_INSTRUCTIONS
+                                ),
+                            },
+                            {
+                                "role": "user",
+                                "content": specification,
+                            },
+                        ],
+                    )
 
-                llm_response = completion.choices[0].message.content
+                    llm_response = completion.choices[0].message.content
 
-                for sentence in str(llm_response).split("\n"):
-                    if "RESULT" in sentence:
-                        if expected_result in sentence:
-                            match_count += 1
-                        else:
-                            failed_testcases += (
-                                f"\nTestcase-{index_of_testcase}: "
-                                f"Expected: {expected_result}\n"
-                                f"LLM: {sentence}\nT"
-                            )
+                    for sentence in str(llm_response).split("\n"):
+                        if "RESULT" in sentence:
+                            if expected_result in sentence:
+                                match_count += 1
+                                print(
+                                    f"Circle-{index_of_circle}"
+                                    f"Claude: Test-{index_of_testcase} PASSED"
+                                )
+                            else:
+                                failed_testcases += (
+                                    f"\nCircle-{index_of_circle}"
+                                    f"Testcase-{index_of_testcase}: "
+                                    f"Expected: {expected_result}"
+                                    f"LLM: {sentence}\n\n"
+                                )
+                                print(
+                                    f"Circle-{index_of_circle}"
+                                    f"Claude: Test-{index_of_testcase} FAILED:"
+                                    f"Result: {sentence}\n"
+                                )
 
         self.assertGreaterEqual(
-            round(match_count / len(self.testcases), 2),
+            round(match_count / len(self.testcases) * RETRY_COUNT, 2),
             CLAUDE_ACCURACY,
-            f"The match occurred only {match_count} times out of {len(self.testcases)} \n{failed_testcases}",
+            f"The match occurred only {match_count} "
+            f"times out of {len(self.testcases) * RETRY_COUNT} \n{failed_testcases}",
         )
 
 
