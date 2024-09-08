@@ -32,7 +32,7 @@ def read_testcases_from_csv(file_path) -> list:
 
 GPT_ACCURACY = 0.7
 CLAUDE_ACCURACY = 0.8
-RETRY_COUNT = 1
+RETRY_COUNT = 2
 
 OPENROUTER_BASE_URL = os.environ["OPENROUTER_BASE_URL"]
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
@@ -45,7 +45,7 @@ class PromptTests(unittest.TestCase):
 
     def setUp(self):
         self.claude_llm = "anthropic/claude-3.5-sonnet-2024-06-20"
-        self.gpt_llm = "openai/gpt-4o"
+        self.gpt_llm = "openai/gpt-4o-2024-05-13"
         self.testcases = read_testcases_from_csv("tests/testcases.csv")
         self.gpt_prompt_template = os.environ["GPT_PROMPT"]
         self.claude_prompt_template = os.environ["CLAUDE_PROMPT"]
@@ -82,21 +82,21 @@ class PromptTests(unittest.TestCase):
                             if expected_result in sentence:
                                 match_count += 1
                                 print(
-                                    f"Circle-{index_of_circle} "
+                                    f"Circle-{index_of_circle + 1} "
                                     f"GPT: Test-{index_of_testcase} PASSED"
                                 )
 
                             else:
                                 failed_testcases += (
-                                    f"\nCircle-{index_of_circle} "
+                                    f"\nCircle-{index_of_circle + 1} "
                                     f"Testcase-{index_of_testcase}: "
                                     f"Expected: {expected_result} "
                                     f"LLM: {sentence}\n\n"
                                 )
                                 print(
-                                    f"Circle-{index_of_circle} "
+                                    f"Circle-{index_of_circle + 1} "
                                     f"GPT: Test-{index_of_testcase} FAILED: "
-                                    f"Result: {sentence}\n"
+                                    f"Result: {sentence}"
                                 )
 
         self.assertGreaterEqual(
@@ -142,20 +142,20 @@ class PromptTests(unittest.TestCase):
                             if expected_result in sentence:
                                 match_count += 1
                                 print(
-                                    f"Circle-{index_of_circle} "
+                                    f"Circle-{index_of_circle + 1} "
                                     f"Claude: Test-{index_of_testcase} PASSED"
                                 )
                             else:
                                 failed_testcases += (
-                                    f"\nCircle-{index_of_circle} "
+                                    f"\nCircle-{index_of_circle + 1} "
                                     f"Testcase-{index_of_testcase}: "
                                     f"Expected: {expected_result} "
                                     f"LLM: {sentence}\n\n"
                                 )
                                 print(
-                                    f"Circle-{index_of_circle} "
+                                    f"Circle-{index_of_circle + 1} "
                                     f"Claude: Test-{index_of_testcase} FAILED: "
-                                    f"Result: {sentence}\n"
+                                    f"Result: {sentence}"
                                 )
 
         self.assertGreaterEqual(
