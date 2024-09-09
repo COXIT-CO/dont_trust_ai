@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: OPTIONS
     env:
-      CLAUDE_INSTRUCTIONS: ${{ secrets.CLAUDE_INSTRUCTIONS }}
-      CLAUDE_PROMPT: ${{ secrets.CLAUDE_PROMPT }}
-      GPT_PROMPT: ${{ secrets.GPT_PROMPT }}
-      INSTRUCTIONS_GPT: ${{ secrets.INSTRUCTIONS_GPT }}
+      CLAUDE_INSTRUCTIONS: ${{ vars.CLAUDE_INSTRUCTIONS }}
+      CLAUDE_PROMPT: ${{ vars.CLAUDE_PROMPT }}
+      GPT_PROMPT: ${{ vars.GPT_PROMPT }}
+      INSTRUCTIONS_GPT: ${{ vars.INSTRUCTIONS_GPT }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-      OPENROUTER_BASE_URL: ${{ secrets.OPENROUTER_BASE_URL }}
-      OPTIONS: ${{ secrets.OPTIONS }}
+      OPENROUTER_BASE_URL: ${{ vars.OPENROUTER_BASE_URL }}
+      OPTIONS: ${{ vars.OPTIONS }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -37,4 +37,19 @@ jobs:
 
     - name: Run prompt validation tests
       run: |
-        python -m unittest discover -s ./tests -p '*_test.py'
+        mkdir -p validation_results
+        mkdir -p tests_results
+        timestamp=$(date +"%Y-%m-%d-%H:%M:%S")
+        python -m unittest discover -s ./tests -p '*_test.py' | tee validation_results/$timestamp.csv
+
+    - name: Upload validation results
+      uses: actions/upload-artifact@v3
+      with:
+        name: validation-test-results
+        path: validation_results/*.csv
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: tests-results
+        path: tests_results/*.csv
