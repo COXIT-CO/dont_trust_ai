@@ -84,7 +84,7 @@ class PromptTests(unittest.TestCase):
             for row in data:
                 writer.writerow(row)
 
-    def setUpClass(self):
+    def setUp(self):
         self.claude_llm = "anthropic/claude-3.5-sonnet-2024-06-20"
         self.gpt_llm = "openai/gpt-4o-2024-05-13"
         self.testcases = self.read_testcases_from_csv("tests/testcases.csv")
