@@ -64,7 +64,7 @@ class PromptTests(unittest.TestCase):
             llm_name (str): name of LLM
         """
 
-        now = datetime.now(pytz.timezone("Europe/Kiev")).strftime("%Y-%m-%d-%H:%M:%S")
+        now = datetime.now(pytz.timezone("Europe/Kiev")).strftime("%Y-%m-%d-%H-%M-%S")
 
         with open(f"tests_results/{llm_name}-{now}.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
