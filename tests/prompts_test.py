@@ -11,7 +11,7 @@ load_dotenv()
 
 GPT_ACCURACY = 0.7
 CLAUDE_ACCURACY = 0.8
-RETRY_COUNT = 2
+RETRY_COUNT = 1
 
 OPENROUTER_BASE_URL = os.environ["OPENROUTER_BASE_URL"]
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
@@ -158,7 +158,7 @@ class PromptTests(unittest.TestCase):
                             )
 
         self.save_response_to_csv(
-            result_testing_tuples, self.gpt_llm
+            result_testing_tuples, "gpt"
         )  # Save prompts and llm responses to csv file
 
         precision_percentage = round(match_count / len(self.testcases) * RETRY_COUNT, 2)
@@ -188,6 +188,7 @@ class PromptTests(unittest.TestCase):
                         model=self.claude_llm,
                         temperature=0,
                         seed=9999,
+                        max_tokens=1000,
                         messages=[
                             {
                                 "role": "system",
@@ -239,7 +240,7 @@ class PromptTests(unittest.TestCase):
                                 )
 
         self.save_response_to_csv(
-            result_testing_tuples, self.claude_llm
+            result_testing_tuples, "claude"
         )  # Save prompts and llm responses to csv file
 
         precision_percentage = round(match_count / len(self.testcases) * RETRY_COUNT, 2)
