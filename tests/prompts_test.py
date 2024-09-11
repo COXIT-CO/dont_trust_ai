@@ -20,7 +20,7 @@ def load_config(file_path):
 
 
 # Getting parameters for testing
-CONFIG_DATA = load_config("config.json")
+CONFIG_DATA = load_config("tests/config.json")
 
 GPT_ACCURACY = CONFIG_DATA.get("GPT_ACCURACY", 0.7)
 CLAUDE_ACCURACY = CONFIG_DATA.get("CLAUDE_ACCURACY", 0.8)
