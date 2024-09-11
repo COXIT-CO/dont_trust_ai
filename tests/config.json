@@ -1,0 +1,286 @@
+{
+  "GPT_ACCURACY": 0.7,
+  "CLAUDE_ACCURACY": 0.8,
+  "RETRY_COUNT": 3,
+  "OPENROUTER_BASE_URL": "https://openrouter.ai/api/v1",
+  "OPTIONS": {
+    "options": [
+      {
+        "series": "1100-C - Sq Flat Edge HPL Frts & HPL Ends IPB CARB Compliant Core",
+        "fronts": "Square Flat Edge High Pressure Laminate",
+        "ends": "High Pressure Laminate",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "Square Flat Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1100-N - Sq Flat Edge HPL Frts & HPL Ends NAUF PB Core",
+        "fronts": "Square Flat Edge High Pressure Laminate",
+        "ends": "High Pressure Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "Square Flat Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1150-C - Sq Flat Edge HPL Frts & TF Ends IPB CARB Compliant Core",
+        "fronts": "Square Flat Edge High Pressure Laminate",
+        "ends": "Thermally Fused Laminate",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "Square Flat Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1150-N - Sq Flat Edge HPL Frts & TF Ends NAUF PB Core",
+        "fronts": "Square Flat Edge High Pressure Laminate",
+        "ends": "Thermally Fused Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "Square Flat Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1200-C - 3mm HPL Frts & HPL Ends IPB CARB Compliant Core",
+        "fronts": "3mm High Pressure Laminate",
+        "ends": "High Pressure Laminate",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1200-N - 3mm HPL Frts & HPL Ends NAUF PB Core",
+        "fronts": "3mm High Pressure Laminate",
+        "ends": "High Pressure Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1250-C - 3mm HPL Frts & TF Ends IPB CARB Compliant Core",
+        "fronts": "3mm High Pressure Laminate",
+        "ends": "Thermally Fused Laminate",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1250-N - 3mm HPL Frts & TF Ends NAUF PB Core",
+        "fronts": "3mm High Pressure Laminate",
+        "ends": "Thermally Fused Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1600-C - Wood Veneer Frts 3mm Wood Edge & HPL Ends IPB CARB Compliant Core",
+        "fronts": "Wood Veneer with 3mm Wood Edge",
+        "ends": "High Pressure Laminate",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Wood Edge",
+        "color_matched": false
+      },
+      {
+        "series": "1600-N - Wood Veneer Frts 3mm Wood Edge & HPL Ends NAUF PB Core",
+        "fronts": "Wood Veneer with 3mm Wood Edge",
+        "ends": "High Pressure Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Wood Edge",
+        "color_matched": false
+      },
+      {
+        "series": "2100-C - Sq Flat Edge TF Frts & Ends IPB CARB Compliant Core",
+        "fronts": "Square Flat Edge Thermally Fused Laminate",
+        "ends": "Square Flat Edge Thermally Fused Laminate",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "Square Flat Edge",
+        "color_matched": false
+      },
+      {
+        "series": "2100-N - Sq Flat Edge TF Frts & Ends NAUF PB Core",
+        "fronts": "Square Flat Edge Thermally Fused Laminate",
+        "ends": "Square Flat Edge Thermally Fused Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "Square Flat Edge",
+        "color_matched": false
+      },
+      {
+        "series": "2200-C - 3mm TF Frts & Ends IPB CARB Compliant Core",
+        "fronts": "3mm Thermally Fused Laminate",
+        "ends": "3mm Thermally Fused Laminate",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Edge",
+        "color_matched": false
+      },
+      {
+        "series": "2200-N - 3mm TF Frts & Ends NAUF PB Core",
+        "fronts": "3mm Thermally Fused Laminate",
+        "ends": "3mm Thermally Fused Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Edge",
+        "color_matched": false
+      },
+      {
+        "series": "2600-C - Wood Veneer Frts 3mm Wood Edge & TF Color Throughout IPB CARB Compliant Core",
+        "fronts": "Wood Veneer with 3mm Wood Edge",
+        "throughout": "Thermally Fused Laminate Color",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Wood Edge",
+        "color_matched": true
+      },
+      {
+        "series": "2600-N - Wood Veneer Frts 3mm Wood Edge & TF Color Throughout NAUF PB Core",
+        "fronts": "Wood Veneer with 3mm Wood Edge",
+        "throughout": "Thermally Fused Laminate Color",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Wood Edge",
+        "color_matched": true
+      },
+      {
+        "series": "2700-C - Sq Flat Edge Frts & TF Color Throughout IPB CARB Compliant Core",
+        "fronts": "Square Flat Edge",
+        "throughout": "Thermally Fused Laminate Color",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "Square Flat Edge",
+        "color_matched": true
+      },
+      {
+        "series": "2700-N - Sq Flat Edge Frts & TF Color Throughout NAUF PB Core",
+        "fronts": "Square Flat Edge",
+        "throughout": "Thermally Fused Laminate Color",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "Square Flat Edge",
+        "color_matched": true
+      },
+      {
+        "series": "2800-C - 3mm Frts & TF Color Throughout IPB CARB Compliant Core",
+        "fronts": "3mm",
+        "throughout": "Thermally Fused Laminate Color",
+        "core": "Industrial Particleboard CARB Compliant",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Edge",
+        "color_matched": true
+      },
+      {
+        "series": "2800-N - 3mm Frts & TF Color Throughout NAUF PB Core",
+        "fronts": "3mm",
+        "throughout": "Thermally Fused Laminate Color",
+        "core": "No Added Urea Formaldehyde Particleboard",
+        "edgebanding": "Flat (.020\") PVC Cabinet Edgebanding",
+        "edge_style": "3mm Radius Edge",
+        "color_matched": true
+      },
+      {
+        "series": "3100 - Sq Flat Edge HPL Frts & Ends Plywood Core Cabinet Box",
+        "fronts": "Square Flat Edge High Pressure Laminate",
+        "ends": "Square Flat Edge High Pressure Laminate",
+        "core": "Plywood Cabinet Box"
+      },
+      {
+        "series": "3200 - 3mm HPL Frts & Ends Plywood Core Cabinet Box",
+        "fronts": "3mm High Pressure Laminate",
+        "ends": "3mm High Pressure Laminate",
+        "core": "Plywood Cabinet Box"
+      },
+      {
+        "series": "3600 - Wood Veneer Frts 3mm Wood Edge & HPL Ends Plywood Core Cabinet Box",
+        "fronts": "Wood Veneer with 3mm Wood Edge",
+        "ends": "High Pressure Laminate",
+        "core": "Plywood Cabinet Box"
+      },
+      {
+        "series": "4200-C - 3mm Frts & A-Tech Surface Throughout IPB CARB Compliant Core",
+        "fronts": "3mm",
+        "throughout": "A-Tech Surface",
+        "core": "Industrial Particleboard CARB Compliant"
+      },
+      {
+        "series": "4200-N - 3mm Frts & A-Tech Surface Throughout NAUF PB Core",
+        "fronts": "3mm",
+        "throughout": "A-Tech Surface",
+        "core": "No Added Urea Formaldehyde Particleboard"
+      },
+      {
+        "series": "4400-C - 3mm Frts & A-Tech Surface Throughout IPB CARB Compliant Core",
+        "fronts": "3mm",
+        "throughout": "A-Tech Surface",
+        "core": "Industrial Particleboard CARB Compliant"
+      },
+      {
+        "series": "4400-N - 3mm Frts & A-Tech Surface Throughout NAUF PB Core",
+        "fronts": "3mm",
+        "throughout": "A-Tech Surface",
+        "core": "No Added Urea Formaldehyde Particleboard"
+      },
+      {
+        "series": "4700 - 3mm Wood Edge and Wood Veneer Frts & Ends",
+        "fronts": "3mm Wood Edge and Wood Veneer",
+        "ends": "3mm Wood Edge and Wood Veneer",
+        "core": "Not Specified"
+      },
+      {
+        "series": "5120-C - 3mm HPL Frts & Ends IPB CARB Compliant Core",
+        "fronts": "3mm High Pressure Laminate",
+        "ends": "3mm High Pressure Laminate",
+        "core": "Industrial Particleboard CARB Compliant"
+      },
+      {
+        "series": "5120-N - 3mm HPL Frts & Ends NAUF PB Core",
+        "fronts": "3mm High Pressure Laminate",
+        "ends": "3mm High Pressure Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard"
+      },
+      {
+        "series": "5220-C - 3mm TF Frts & Ends IPB CARB Compliant Core",
+        "fronts": "3mm Thermally Fused Laminate",
+        "ends": "3mm Thermally Fused Laminate",
+        "core": "Industrial Particleboard CARB Compliant"
+      },
+      {
+        "series": "5220-N - 3mm TF Frts & Ends NAUF PB Core",
+        "fronts": "3mm Thermally Fused Laminate",
+        "ends": "3mm Thermally Fused Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard"
+      },
+      {
+        "series": "6120-C - 3mm HPL Frts & Exteriors IPB CARB Compliant Core",
+        "fronts": "3mm High Pressure Laminate",
+        "exteriors": "3mm High Pressure Laminate",
+        "core": "Industrial Particleboard CARB Compliant"
+      },
+      {
+        "series": "6120-N - 3mm HPL Frts & Exteriors NAUF PB Core",
+        "fronts": "3mm High Pressure Laminate",
+        "exteriors": "3mm High Pressure Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard"
+      },
+      {
+        "series": "6220-C - 3mm TF Frts & Exteriors IPB CARB Compliant Core",
+        "fronts": "3mm Thermally Fused Laminate",
+        "exteriors": "3mm Thermally Fused Laminate",
+        "core": "Industrial Particleboard CARB Compliant"
+      },
+      {
+        "series": "6220-N - 3mm TF Frts & Exteriors NAUF PB Core",
+        "fronts": "3mm Thermally Fused Laminate",
+        "exteriors": "3mm Thermally Fused Laminate",
+        "core": "No Added Urea Formaldehyde Particleboard"
+      }
+    ]
+  }
+}

@@ -2,23 +2,35 @@ import csv
 import os
 import unittest
 import pytz
+import json
 from datetime import datetime
 from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
 
-
-GPT_ACCURACY = 0.7
-CLAUDE_ACCURACY = 0.8
-RETRY_COUNT = 1
-
-OPENROUTER_BASE_URL = os.environ["OPENROUTER_BASE_URL"]
 OPENROUTER_API_KEY = os.environ["OPENROUTER_API_KEY"]
-OPTIONS = os.environ["OPTIONS"]
+
+
+def load_config(file_path):
+    with open(file_path, "r") as file:
+        config = json.load(file)
+
+    return config
+
+
+# Getting parameters for testing
+CONFIG_DATA = load_config("config.json")
+
+GPT_ACCURACY = CONFIG_DATA.get("GPT_ACCURACY", 0.7)
+CLAUDE_ACCURACY = CONFIG_DATA.get("CLAUDE_ACCURACY", 0.8)
+RETRY_COUNT = CONFIG_DATA.get("RETRY_COUNT", 1)
+OPENROUTER_BASE_URL = CONFIG_DATA.get("OPENROUTER_BASE_URL", "")
+OPTIONS = CONFIG_DATA.get("OPTIONS", "")
 
 
 class PromptTests(unittest.TestCase):
+
     @staticmethod
     def read_testcases_from_csv(file_path: str) -> list:
         """
@@ -122,10 +134,11 @@ class PromptTests(unittest.TestCase):
                         ],
                     )
                     llm_response = completion.choices[0].message.content
+                    index_of_result_word = llm_response.index("RESULT")
 
                     for sentence in str(llm_response).split("\n"):
                         if "RESULT" in sentence:
-                            if expected_result in sentence:
+                            if expected_result in llm_response[index_of_result_word:]:
                                 match_count += 1
                                 print(
                                     f"Circle-{index_of_circle + 1} "
@@ -205,10 +218,11 @@ class PromptTests(unittest.TestCase):
                     )
 
                     llm_response = completion.choices[0].message.content
+                    index_of_result_word = llm_response.index("RESULT")
 
                     for sentence in str(llm_response).split("\n"):
                         if "RESULT" in sentence:
-                            if expected_result in sentence:
+                            if expected_result in llm_response[index_of_result_word:]:
                                 match_count += 1
                                 print(
                                     f"Circle-{index_of_circle + 1} "
@@ -228,7 +242,7 @@ class PromptTests(unittest.TestCase):
                                 )
                                 result_testing_tuples.append(
                                     (
-                                        index_of_circle,
+                                        index_of_circle + 1,
                                         index_of_testcase,
                                         sentence,
                                         llm_response,
