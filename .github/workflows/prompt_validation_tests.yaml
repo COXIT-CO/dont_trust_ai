@@ -41,6 +41,7 @@ jobs:
       run: |
         mkdir -p validation_results
         mkdir -p tests_results
+        mkdir -p config
         timestamp=$(date +"%Y-%m-%d-%H-%M-%S")
         python -m unittest discover -s ./tests -p '*_test.py' | tee validation_results/$timestamp.csv
         test_status=$?
