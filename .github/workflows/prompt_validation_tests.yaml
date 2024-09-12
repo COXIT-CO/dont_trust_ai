@@ -14,10 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     env:
-      CLAUDE_INSTRUCTIONS: ${{ vars.CLAUDE_INSTRUCTIONS }}
       CLAUDE_PROMPT: ${{ vars.CLAUDE_PROMPT }}
+      CLAUDE_INSTRUCTIONS: ${{ vars.CLAUDE_INSTRUCTIONS }}
       GPT_PROMPT: ${{ vars.GPT_PROMPT }}
       INSTRUCTIONS_GPT: ${{ vars.INSTRUCTIONS_GPT }}
+      QWEN_PROMPT: ${{ vars.QWEN_PROMPT }}
+      QWEN_INSTRUCTIONS: ${{ vars.QWEN_INSTRUCTIONS }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       OPENROUTER_BASE_URL: ${{ vars.OPENROUTER_BASE_URL }}
       OPTIONS: ${{ vars.OPTIONS }}
@@ -62,4 +64,10 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: validation-test-logs
-        path: logs/*.txt
+        path: logs/*
+
+    - name: Upload config
+      uses: actions/upload-artifact@v3
+      with:
+        name: validation-test-config
+        path: config/*.json
