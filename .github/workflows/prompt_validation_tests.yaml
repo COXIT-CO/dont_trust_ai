@@ -39,36 +39,12 @@ jobs:
 
     - name: Run prompt validation tests
       run: |
-        mkdir -p validation_results
         mkdir -p tests_results
-        mkdir -p config
         timestamp=$(date +"%Y-%m-%d-%H-%M-%S")
-        python -m unittest discover -s ./tests -p '*_test.py' | tee validation_results/$timestamp.csv
-        test_status=$?
-        if [ $test_status -ne 0 ]; then
-          exit $test_status
-        fi
-
-    - name: Upload validation results
-      uses: actions/upload-artifact@v3
-      with:
-        name: validation-test-results
-        path: validation_results/*.csv
+        python -m unittest discover -s ./tests -p '*_test.py'
 
     - name: Upload test results
       uses: actions/upload-artifact@v3
       with:
         name: tests-results
         path: tests_results/*.csv
-
-    - name: Upload logs
-      uses: actions/upload-artifact@v3
-      with:
-        name: validation-test-logs
-        path: logs/*
-
-    - name: Upload config
-      uses: actions/upload-artifact@v3
-      with:
-        name: validation-test-config
-        path: config/*.json
