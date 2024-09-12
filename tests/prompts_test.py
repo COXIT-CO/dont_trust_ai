@@ -385,23 +385,5 @@ class PromptTests(unittest.TestCase):
         )
 
 
-config = {
-    "CLAUDE_LLM": GPT_MODEL,
-    "GPT_LLM": CLAUDE_MODEL,
-    "QWEN_LLM": QWEN_MODEL,
-    "GPT_PROMPT_TEMPLATE": os.environ.get("GPT_PROMPT"),
-    "CLAUDE_PROMPT_TEMPLATE": os.environ.get("CLAUDE_PROMPT"),
-    "QWEN_PROMPT_TEMPLATE": os.environ.get("QWEN_PROMPT"),
-    "GPT_INSTRUCTIONS": os.environ.get("GPT_INSTRUCTIONS"),
-    "CLAUDE_INSTRUCTIONS": os.environ.get("CLAUDE_INSTRUCTIONS"),
-    "QWEN_INSTRUCTIONS": os.environ.get("QWEN_INSTRUCTIONS"),
-}
-
-# Write to JSON file
-with open("config/config.json", "w") as config_file:
-    json.dump(config, config_file, indent=4)
-
-print("Configuration saved to config.json")
-
 if __name__ == "__main__":
     unittest.main()
