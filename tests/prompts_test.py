@@ -28,13 +28,30 @@ OPTIONS = CONFIG_DATA.get("OPTIONS", "")
 
 GPT_MODEL = CONFIG_DATA.get("GPT_MODEL", "")
 GPT_ACCURACY = CONFIG_DATA.get("GPT_ACCURACY", 0.7)
+
 CLAUDE_MODEL = CONFIG_DATA.get("CLAUDE_MODEL", "")
 CLAUDE_ACCURACY = CONFIG_DATA.get("CLAUDE_ACCURACY", 0.8)
+
 QWEN_MODEL = CONFIG_DATA.get("QWEN_MODEL", "")
 QWEN_ACCURACY = CONFIG_DATA.get("QWEN_ACCURACY", 0.8)
 
 
 class PromptTests(unittest.TestCase):
+    @staticmethod
+    def read_prompts_from_csv(file_path) -> list:
+        result = []
+        with open(file_path, "r") as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                name, prompt_template, instruction = row
+                result.append(
+                    (
+                        name.strip(),
+                        prompt_template.strip(),
+                        instruction.strip(),
+                    )
+                )
+        return result[1:]
 
     @staticmethod
     def read_testcases_from_csv(file_path: str) -> list:
@@ -105,13 +122,18 @@ class PromptTests(unittest.TestCase):
         self.claude_llm = GPT_MODEL
         self.gpt_llm = CLAUDE_MODEL
         self.qwen_llm = QWEN_MODEL
+
         self.testcases = self.read_testcases_from_csv("tests/testcases.csv")
-        self.gpt_prompt_template = os.environ["GPT_PROMPT"]
-        self.claude_prompt_template = os.environ["CLAUDE_PROMPT"]
-        self.qwen_prompt_template = os.environ["QWEN_PROMPT"]
-        self.gpt_instructions = os.environ["GPT_INSTRUCTIONS"]
-        self.claude_instructions = os.environ["CLAUDE_INSTRUCTIONS"]
-        self.qwen_instructions = os.environ["QWEN_INSTRUCTIONS"]
+        self.prompts_config = self.read_prompts_from_csv("tests/prompts_config.csv")
+
+        self.gpt_prompt_template = self.prompts_config[0][1]
+        self.gpt_instructions = self.prompts_config[0][2]
+
+        self.qwen_prompt_template = self.prompts_config[1][1]
+        self.qwen_instructions = self.prompts_config[1][2]
+
+        self.claude_prompt_template = self.prompts_config[2][1]
+        self.claude_instructions = self.prompts_config[2][2]
 
     # def test_gpt_prompt(self):
     #     match_count = 0
@@ -372,7 +394,7 @@ config = {
     "QWEN_PROMPT_TEMPLATE": os.environ.get("QWEN_PROMPT"),
     "GPT_INSTRUCTIONS": os.environ.get("GPT_INSTRUCTIONS"),
     "CLAUDE_INSTRUCTIONS": os.environ.get("CLAUDE_INSTRUCTIONS"),
-    "QWEN_INSTRUCTIONS": os.environ.get("QWEN_INSTRUCTIONS")
+    "QWEN_INSTRUCTIONS": os.environ.get("QWEN_INSTRUCTIONS"),
 }
 
 # Write to JSON file
