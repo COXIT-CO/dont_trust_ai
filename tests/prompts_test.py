@@ -28,18 +28,18 @@ OPTIONS = CONFIG_DATA.get("OPTIONS", "")
 
 GPT_MODEL = CONFIG_DATA.get("GPT_MODEL", "")
 GPT_ACCURACY = CONFIG_DATA.get("GPT_ACCURACY", 0.7)
-GPT_PROMPT = CONFIG_DATA.get("GPT_PROMPT", "")
+GPT_PROMPT_TEMPLATE = CONFIG_DATA.get("GPT_PROMPT_TEMPLATE", "")
 GPT_INSTRUCTION = CONFIG_DATA.get("GPT_INSTRUCTION", "")
 
 
 CLAUDE_MODEL = CONFIG_DATA.get("CLAUDE_MODEL", "")
 CLAUDE_ACCURACY = CONFIG_DATA.get("CLAUDE_ACCURACY", 0.8)
-CLAUDE_PROMPT = CONFIG_DATA.get("CLAUDE_PROMPT", "")
+CLAUDE_PROMPT_TEMPLATE = CONFIG_DATA.get("CLAUDE_PROMPT_TEMPLATE", "")
 CLAUDE_INSTRUCTION = CONFIG_DATA.get("CLAUDE_INSTRUCTION", "")
 
 QWEN_MODEL = CONFIG_DATA.get("QWEN_MODEL", "")
 QWEN_ACCURACY = CONFIG_DATA.get("QWEN_ACCURACY", 0.8)
-QWEN_PROMPT = CONFIG_DATA.get("QWEN_PROMPT",  "")
+QWEN_PROMPT_TEMPLATE = CONFIG_DATA.get("QWEN_PROMPT_TEMPLATE",  "")
 QWEN_INSTRUCTION = CONFIG_DATA.get("QWEN_INSTRUCTION",  "")
 
 
@@ -297,7 +297,7 @@ class PromptTests(unittest.TestCase):
                         messages=[
                             {
                                 "role": "system",
-                                "content": QWEN_PROMPT.format(
+                                "content": QWEN_PROMPT_TEMPLATE.format(
                                     OPTIONS=OPTIONS,
                                     INSTRUCTION=QWEN_INSTRUCTION,
                                 ),
@@ -336,9 +336,10 @@ class PromptTests(unittest.TestCase):
                                 (
                                     index_of_circle + 1,
                                     index_of_testcase,
+                                    expected_result,
                                     sentence,
                                     llm_response,
-                                    QWEN_PROMPT,
+                                    QWEN_PROMPT_TEMPLATE,
                                     QWEN_INSTRUCTION,
                                     OPTIONS,
                                     QWEN_MODEL,
