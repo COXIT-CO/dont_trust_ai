@@ -14,15 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     env:
-      CLAUDE_PROMPT: ${{ vars.CLAUDE_PROMPT }}
-      CLAUDE_INSTRUCTIONS: ${{ vars.CLAUDE_INSTRUCTIONS }}
-      GPT_PROMPT: ${{ vars.GPT_PROMPT }}
-      GPT_INSTRUCTIONS: ${{ vars.GPT_INSTRUCTIONS }}
-      QWEN_PROMPT: ${{ vars.QWEN_PROMPT }}
-      QWEN_INSTRUCTIONS: ${{ vars.QWEN_INSTRUCTIONS }}
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-      OPENROUTER_BASE_URL: ${{ vars.OPENROUTER_BASE_URL }}
-      OPTIONS: ${{ vars.OPTIONS }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
