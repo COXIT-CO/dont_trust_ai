@@ -1,5 +1,5 @@
 {
-  "RETRY_COUNT": 1,
+  "RETRY_COUNT": 3,
   "OPENROUTER_BASE_URL": "https://openrouter.ai/api/v1",
   "GPT_ACCURACY": 0.7,
   "CLAUDE_ACCURACY": 0.8,
