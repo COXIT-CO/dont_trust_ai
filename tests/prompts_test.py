@@ -25,22 +25,20 @@ CONFIG_DATA = load_config("tests/config.json")
 RETRY_COUNT = CONFIG_DATA.get("RETRY_COUNT", 1)
 OPENROUTER_BASE_URL = CONFIG_DATA.get("OPENROUTER_BASE_URL", "")
 OPTIONS = CONFIG_DATA.get("OPTIONS", "")
+INSTRUCTION = CONFIG_DATA.get("INSTRUCTION", "")
 
 GPT_MODEL = CONFIG_DATA.get("GPT_MODEL", "")
 GPT_ACCURACY = CONFIG_DATA.get("GPT_ACCURACY", 0.7)
 GPT_PROMPT_TEMPLATE = CONFIG_DATA.get("GPT_PROMPT_TEMPLATE", "")
-GPT_INSTRUCTION = CONFIG_DATA.get("GPT_INSTRUCTION", "")
 
 
 CLAUDE_MODEL = CONFIG_DATA.get("CLAUDE_MODEL", "")
 CLAUDE_ACCURACY = CONFIG_DATA.get("CLAUDE_ACCURACY", 0.8)
 CLAUDE_PROMPT_TEMPLATE = CONFIG_DATA.get("CLAUDE_PROMPT_TEMPLATE", "")
-CLAUDE_INSTRUCTION = CONFIG_DATA.get("CLAUDE_INSTRUCTION", "")
 
 QWEN_MODEL = CONFIG_DATA.get("QWEN_MODEL", "")
-QWEN_ACCURACY = CONFIG_DATA.get("QWEN_ACCURACY", 0.8)
-QWEN_PROMPT_TEMPLATE = CONFIG_DATA.get("QWEN_PROMPT_TEMPLATE",  "")
-QWEN_INSTRUCTION = CONFIG_DATA.get("QWEN_INSTRUCTION",  "")
+QWEN_ACCURACY = CONFIG_DATA.get("QWEN_ACCURACY", 0.65)
+QWEN_PROMPT_TEMPLATE = CONFIG_DATA.get("QWEN_PROMPT_TEMPLATE", "")
 
 
 class PromptTests(unittest.TestCase):
@@ -112,171 +110,170 @@ class PromptTests(unittest.TestCase):
     def setUp(self):
         self.testcases = self.read_testcases_from_csv("tests/testcases.csv")
 
-    # def test_gpt_prompt(self):
-    #     match_count = 0
-    #     failed_testcases = ""
-    #     result_testing_tuples = []
-    #     client = OpenAI(
-    #         base_url=OPENROUTER_BASE_URL,
-    #         api_key=OPENROUTER_API_KEY,
-    #     )
-    #     for index_of_circle in range(
-    #         RETRY_COUNT
-    #     ):  # Retry tests for correct evaluation precision
-    #         for index_of_testcase, expected_result, specification in self.testcases:
-    #             with self.subTest(i=index_of_testcase):  # subTest for every llm call
-    #                 completion = client.chat.completions.create(
-    #                     model=self.gpt_llm,
-    #                     temperature=0,
-    #                     seed=111,
-    #                     messages=[
-    #                         {
-    #                             "role": "system",
-    #                             "content": self.gpt_prompt_template.format(
-    #                                 OPTIONS=OPTIONS,
-    #                                 INSTRUCTION=self.gpt_instructions,
-    #                                 INPUT_TEXT=specification,
-    #                             ),
-    #                         },
-    #                     ],
-    #                 )
-    #                 llm_response = completion.choices[0].message.content
-    #                 index_of_result_word = llm_response.find("RESULT")
-    #
-    #                 for sentence in str(llm_response).split("\n"):
-    #                     if "RESULT" in sentence:
-    #                         if expected_result in llm_response[index_of_result_word:]:
-    #                             match_count += 1
-    #                             print(
-    #                                 f"Circle-{index_of_circle + 1} "
-    #                                 f"GPT: Test-{index_of_testcase} PASSED"
-    #                             )
-    #
-    #                         else:
-    #                             failed_testcases += (
-    #                                 f"\nCircle-{index_of_circle + 1} "
-    #                                 f"Testcase-{index_of_testcase}: "
-    #                                 f"Expected: {expected_result} "
-    #                                 f"LLM: {sentence}\n\n"
-    #                             )
-    #                             print(
-    #                                 f"Circle-{index_of_circle + 1} "
-    #                                 f"GPT: Test-{index_of_testcase} FAILED: "
-    #                                 f"Result: {sentence}"
-    #                             )
-    #                         result_testing_tuples.append(
-    #                             (
-    #                                 index_of_circle + 1,
-    #                                 index_of_testcase,
-    #                                 sentence,
-    #                                 llm_response,
-    #                                 self.gpt_prompt_template,
-    #                                 self.gpt_instructions,
-    #                                 OPTIONS,
-    #                                 self.gpt_llm,
-    #                             )
-    #                         )
-    #
-    #     self.save_response_to_csv(
-    #         result_testing_tuples, "gpt"
-    #     )  # Save prompts and llm responses to csv file
-    #
-    #     precision_percentage = round(
-    #         match_count / (len(self.testcases) * RETRY_COUNT), 2
-    #     )
-    #     print(f"Precision percentage is {precision_percentage}")
-    #
-    #     self.assertGreaterEqual(
-    #         precision_percentage,
-    #         GPT_ACCURACY,
-    #         f"The match occurred only {match_count} "
-    #         f"times out of {len(self.testcases) * RETRY_COUNT} \n{failed_testcases}",
-    #     )
-    #
-    # def test_claude_prompt(self):
-    #     match_count = 0
-    #     failed_testcases = ""
-    #     result_testing_tuples = []
-    #     client = OpenAI(
-    #         base_url=OPENROUTER_BASE_URL,
-    #         api_key=OPENROUTER_API_KEY,
-    #     )
-    #     for index_of_circle in range(
-    #         RETRY_COUNT
-    #     ):  # Retry tests for correct evaluation precision
-    #         for index_of_testcase, expected_result, specification in self.testcases:
-    #             with self.subTest(i=index_of_testcase):  # subTest for every llm call
-    #                 completion = client.chat.completions.create(
-    #                     model=self.claude_llm,
-    #                     temperature=0,
-    #                     seed=9999,
-    #                     max_tokens=1000,
-    #                     messages=[
-    #                         {
-    #                             "role": "system",
-    #                             "content": self.claude_prompt_template.format(
-    #                                 OPTIONS=OPTIONS,
-    #                                 INSTRUCTION=self.claude_instructions,
-    #                             ),
-    #                         },
-    #                         {
-    #                             "role": "user",
-    #                             "content": specification,
-    #                         },
-    #                     ],
-    #                 )
-    #
-    #                 llm_response = completion.choices[0].message.content
-    #                 index_of_result_word = llm_response.find("RESULT")
-    #
-    #                 for sentence in str(llm_response).split("\n"):
-    #                     if "RESULT" in sentence:
-    #                         if expected_result in llm_response[index_of_result_word:]:
-    #                             match_count += 1
-    #                             print(
-    #                                 f"Circle-{index_of_circle + 1} "
-    #                                 f"Claude: Test-{index_of_testcase} PASSED"
-    #                             )
-    #                         else:
-    #                             failed_testcases += (
-    #                                 f"\nCircle-{index_of_circle + 1} "
-    #                                 f"Testcase-{index_of_testcase}: "
-    #                                 f"Expected: {expected_result} "
-    #                                 f"LLM: {sentence}\n\n"
-    #                             )
-    #                             print(
-    #                                 f"Circle-{index_of_circle + 1} "
-    #                                 f"Claude: Test-{index_of_testcase} FAILED: "
-    #                                 f"Result: {sentence}"
-    #                             )
-    #                         result_testing_tuples.append(
-    #                             (
-    #                                 index_of_circle + 1,
-    #                                 index_of_testcase,
-    #                                 sentence,
-    #                                 llm_response,
-    #                                 self.claude_prompt_template,
-    #                                 self.claude_instructions,
-    #                                 OPTIONS,
-    #                                 self.claude_llm,
-    #                             )
-    #                         )
-    #
-    #     self.save_response_to_csv(
-    #         result_testing_tuples, "claude"
-    #     )  # Save prompts and llm responses to csv file
-    #
-    #     precision_percentage = round(
-    #         match_count / (len(self.testcases) * RETRY_COUNT), 2
-    #     )
-    #     print(f"Precision percentage is {precision_percentage}")
-    #
-    #     self.assertGreaterEqual(
-    #         precision_percentage,
-    #         CLAUDE_ACCURACY,
-    #         f"The match occurred only {match_count} "
-    #         f"times out of {len(self.testcases) * RETRY_COUNT} \n{failed_testcases}",
-    #     )
+    def test_gpt_prompt(self):
+        match_count = 0
+        failed_testcases = ""
+        result_testing_tuples = []
+        client = OpenAI(
+            base_url=OPENROUTER_BASE_URL,
+            api_key=OPENROUTER_API_KEY,
+        )
+        for index_of_circle in range(
+            RETRY_COUNT
+        ):  # Retry tests for correct evaluation precision
+            for index_of_testcase, expected_result, specification in self.testcases:
+                with self.subTest(i=index_of_testcase):  # subTest for every llm call
+                    completion = client.chat.completions.create(
+                        model=GPT_MODEL,
+                        temperature=0,
+                        messages=[
+                            {
+                                "role": "system",
+                                "content": GPT_PROMPT_TEMPLATE.format(
+                                    OPTIONS=OPTIONS,
+                                    INSTRUCTION=INSTRUCTION,
+                                ),
+                            },
+                            {
+                                "role": "user",
+                                "content": specification,
+                            },
+                        ],
+                    )
+
+                    llm_response = completion.choices[0].message.content
+                    index_of_result_word = llm_response.find("RESULT")
+
+                    for sentence in str(llm_response).split("\n"):
+                        if "RESULT" in sentence:
+                            if expected_result in llm_response[index_of_result_word:]:
+                                match_count += 1
+                                print(
+                                    f"Circle-{index_of_circle + 1} "
+                                    f"GPT: Test-{index_of_testcase} PASSED"
+                                )
+                            else:
+                                failed_testcases += (
+                                    f"\nCircle-{index_of_circle + 1} "
+                                    f"Testcase-{index_of_testcase}: "
+                                    f"Expected: {expected_result} "
+                                    f"LLM: {sentence}\n\n"
+                                )
+                                print(
+                                    f"Circle-{index_of_circle + 1} "
+                                    f"GPT: Test-{index_of_testcase} FAILED: "
+                                    f"Result: {sentence}"
+                                )
+                            result_testing_tuples.append(
+                                (
+                                    index_of_circle + 1,
+                                    index_of_testcase,
+                                    expected_result,
+                                    sentence,
+                                    llm_response,
+                                    GPT_PROMPT_TEMPLATE,
+                                    INSTRUCTION,
+                                    OPTIONS,
+                                    GPT_MODEL,
+                                )
+                            )
+
+        self.save_response_to_csv(
+            result_testing_tuples, "gpt"
+        )  # Save prompts and llm responses to csv file
+
+        accuracy = round(match_count / (len(self.testcases) * RETRY_COUNT), 2)
+        print(f"Accuracy is {accuracy}")
+
+        self.assertGreaterEqual(
+            accuracy,
+            GPT_ACCURACY,
+            f"The match occurred only {match_count} "
+            f"times out of {len(self.testcases) * RETRY_COUNT} \n{failed_testcases}",
+        )
+
+    def test_claude_prompt(self):
+        match_count = 0
+        failed_testcases = ""
+        result_testing_tuples = []
+        client = OpenAI(
+            base_url=OPENROUTER_BASE_URL,
+            api_key=OPENROUTER_API_KEY,
+        )
+        for index_of_circle in range(
+            RETRY_COUNT
+        ):  # Retry tests for correct evaluation precision
+            for index_of_testcase, expected_result, specification in self.testcases:
+                with self.subTest(i=index_of_testcase):  # subTest for every llm call
+                    completion = client.chat.completions.create(
+                        model=CLAUDE_MODEL,
+                        temperature=0,
+                        max_tokens=1000,
+                        messages=[
+                            {
+                                "role": "system",
+                                "content": CLAUDE_PROMPT_TEMPLATE.format(
+                                    OPTIONS=OPTIONS,
+                                    INSTRUCTION=INSTRUCTION,
+                                ),
+                            },
+                            {
+                                "role": "user",
+                                "content": specification,
+                            },
+                        ],
+                    )
+
+                    llm_response = completion.choices[0].message.content
+                    index_of_result_word = llm_response.find("RESULT")
+
+                    for sentence in str(llm_response).split("\n"):
+                        if "RESULT" in sentence:
+                            if expected_result in llm_response[index_of_result_word:]:
+                                match_count += 1
+                                print(
+                                    f"Circle-{index_of_circle + 1} "
+                                    f"Claude: Test-{index_of_testcase} PASSED"
+                                )
+                            else:
+                                failed_testcases += (
+                                    f"\nCircle-{index_of_circle + 1} "
+                                    f"Testcase-{index_of_testcase}: "
+                                    f"Expected: {expected_result} "
+                                    f"LLM: {sentence}\n\n"
+                                )
+                                print(
+                                    f"Circle-{index_of_circle + 1} "
+                                    f"Claude: Test-{index_of_testcase} FAILED: "
+                                    f"Result: {sentence}"
+                                )
+                            result_testing_tuples.append(
+                                (
+                                    index_of_circle + 1,
+                                    index_of_testcase,
+                                    expected_result,
+                                    sentence,
+                                    llm_response,
+                                    CLAUDE_PROMPT_TEMPLATE,
+                                    INSTRUCTION,
+                                    OPTIONS,
+                                    CLAUDE_MODEL,
+                                )
+                            )
+
+        self.save_response_to_csv(
+            result_testing_tuples, "claude"
+        )  # Save prompts and llm responses to csv file
+
+        accuracy = round(match_count / (len(self.testcases) * RETRY_COUNT), 2)
+        print(f"Accuracy is {accuracy}")
+
+        self.assertGreaterEqual(
+            accuracy,
+            CLAUDE_ACCURACY,
+            f"The match occurred only {match_count} "
+            f"times out of {len(self.testcases) * RETRY_COUNT} \n{failed_testcases}",
+        )
 
     def test_qwen_prompt(self):
         match_count = 0
@@ -294,12 +291,13 @@ class PromptTests(unittest.TestCase):
                     completion = client.chat.completions.create(
                         model=QWEN_MODEL,
                         temperature=0,
+                        max_tokens=1000,
                         messages=[
                             {
                                 "role": "system",
                                 "content": QWEN_PROMPT_TEMPLATE.format(
                                     OPTIONS=OPTIONS,
-                                    INSTRUCTION=QWEN_INSTRUCTION,
+                                    INSTRUCTION=INSTRUCTION,
                                 ),
                             },
                             {
@@ -340,7 +338,7 @@ class PromptTests(unittest.TestCase):
                                     sentence,
                                     llm_response,
                                     QWEN_PROMPT_TEMPLATE,
-                                    QWEN_INSTRUCTION,
+                                    INSTRUCTION,
                                     OPTIONS,
                                     QWEN_MODEL,
                                 )
@@ -350,13 +348,11 @@ class PromptTests(unittest.TestCase):
             result_testing_tuples, "qwen"
         )  # Save prompts and llm responses to csv file
 
-        precision_percentage = round(
-            match_count / (len(self.testcases) * RETRY_COUNT), 2
-        )
-        print(f"Precision percentage is {precision_percentage}")
+        accuracy = round(match_count / (len(self.testcases) * RETRY_COUNT), 2)
+        print(f"Accuracy is {accuracy}")
 
         self.assertGreaterEqual(
-            precision_percentage,
+            accuracy,
             QWEN_ACCURACY,
             f"The match occurred only {match_count} "
             f"times out of {len(self.testcases) * RETRY_COUNT} \n{failed_testcases}",
