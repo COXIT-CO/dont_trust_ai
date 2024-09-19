@@ -208,7 +208,6 @@ class PromptTests(unittest.TestCase):
                     completion = client.chat.completions.create(
                         model=CLAUDE_MODEL,
                         temperature=0,
-                        max_tokens=1000,
                         messages=[
                             {
                                 "role": "system",
