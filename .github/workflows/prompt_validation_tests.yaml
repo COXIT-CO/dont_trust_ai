@@ -4,11 +4,20 @@ on:
   schedule:
     - cron: '0 0 * * *'  # Runs daily at midnight UTC
   workflow_dispatch:  # Allows manual trigger of the workflow
-  pull_request:       # Trigger for pull request events
-      types:
-        - opened
-        - synchronize  # Trigger on PR updates (commits, force-push)
-        - reopened     # Trigger if PR is reopened
+  pull_request:
+    paths:
+      - 'tests/config.json'
+      - 'tests/prompts_test.py'
+      - 'tests/testcases.csv'
+    types:
+      - opened
+      - synchronize  # Trigger on PR updates (commits, force-push)
+      - reopened     # Trigger if PR is reopened
+  push:
+    paths:
+      - 'tests/config.json'
+      - 'tests/prompts_test.py'
+      - 'tests/testcases.csv'
 jobs:
   run-tests:
     runs-on: ubuntu-latest
