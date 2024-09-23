@@ -196,7 +196,7 @@ class PromptTests(unittest.TestCase):
                                     prompt_template,
                                     INSTRUCTION,
                                     OPTIONS,
-                                    model_name,
+                                    model,
                                 )
                             )
                     if not is_result_found:
@@ -221,7 +221,7 @@ class PromptTests(unittest.TestCase):
                                 prompt_template,
                                 INSTRUCTION,
                                 OPTIONS,
-                                model_name,
+                                model,
                             )
                         )
 
