@@ -25,26 +25,27 @@ CONFIG_DATA = load_config("tests/config.json")
 RETRY_COUNT = CONFIG_DATA.get("RETRY_COUNT", 1)
 OPENROUTER_BASE_URL = CONFIG_DATA.get("OPENROUTER_BASE_URL", "")
 OPTIONS = CONFIG_DATA.get("OPTIONS", "")
-INSTRUCTION = CONFIG_DATA.get("INSTRUCTION", "")
-
 MODELS_CONFIG = [
     {
         "name": "GPT",
         "model": CONFIG_DATA.get("GPT_MODEL", ""),
         "accuracy": CONFIG_DATA.get("GPT_ACCURACY", 0.7),
         "prompt_template": CONFIG_DATA.get("GPT_PROMPT_TEMPLATE", ""),
+        "instruction": CONFIG_DATA.get("GPT_INSTRUCTION", ""),
     },
     {
         "name": "CLAUDE",
         "model": CONFIG_DATA.get("CLAUDE_MODEL", ""),
         "accuracy": CONFIG_DATA.get("CLAUDE_ACCURACY", 0.8),
         "prompt_template": CONFIG_DATA.get("CLAUDE_PROMPT_TEMPLATE", ""),
+        "instruction": CONFIG_DATA.get("INSTRUCTION", ""),
     },
     {
         "name": "QWEN",
         "model": CONFIG_DATA.get("QWEN_MODEL", ""),
         "accuracy": CONFIG_DATA.get("QWEN_ACCURACY", 0.65),
         "prompt_template": CONFIG_DATA.get("QWEN_PROMPT_TEMPLATE", ""),
+        "instruction": CONFIG_DATA.get("INSTRUCTION", ""),
     },
 ]
 
@@ -129,6 +130,7 @@ class PromptTests(unittest.TestCase):
         model_name: str,
         model: str,
         prompt_template: str,
+        instruction: str,
         accuracy_threshold: float,
     ):
         match_count = 0
@@ -151,7 +153,7 @@ class PromptTests(unittest.TestCase):
                                 "role": "system",
                                 "content": prompt_template.format(
                                     OPTIONS=OPTIONS,
-                                    INSTRUCTION=INSTRUCTION,
+                                    INSTRUCTION=instruction,
                                 ),
                             },
                             {
@@ -194,7 +196,7 @@ class PromptTests(unittest.TestCase):
                                     sentence,
                                     llm_response,
                                     prompt_template,
-                                    INSTRUCTION,
+                                    instruction,
                                     OPTIONS,
                                     model,
                                 )
@@ -219,7 +221,7 @@ class PromptTests(unittest.TestCase):
                                 "RESULT WAS NOT FOUND",
                                 llm_response,
                                 prompt_template,
-                                INSTRUCTION,
+                                instruction,
                                 OPTIONS,
                                 model,
                             )
@@ -245,6 +247,7 @@ class PromptTests(unittest.TestCase):
                     model_name=config["name"],
                     model=config["model"],
                     prompt_template=config["prompt_template"],
+                    instruction=config["instruction"],
                     accuracy_threshold=config["accuracy"],
                 )
 
