@@ -24,9 +24,13 @@ async def llm_call(
                 {
                     "role": "system",
                     "content": prompt_template.format(
-                        OPTIONS=options, INSTRUCTION=instruction, INPUT_TEXT=input_text
+                        OPTIONS=options, INSTRUCTION=instruction
                     ),
                 },
+                {
+                    "role": "user",
+                    "content": input_text,
+                }
             ],
         )
     except APIError as e:
