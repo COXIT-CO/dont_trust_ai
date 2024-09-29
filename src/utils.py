@@ -55,33 +55,21 @@ def read_prompts_from_csv(file_path) -> list:
     return result[1:]
 
 
-def save_response_to_csv(data: list[tuple]):
+def save_response_to_csv(columns: tuple, data: list[tuple], file_path: str = "results"):
     """
     Writes a list of tuples to a CSV file.
 
     Args:
-        data (list): List of tuples (
-            ('Test Number', 'Expected Label', 'LLM Result', 'LLM Step by Step Reasoning', 'LLM', 'Prompt Number')
-        ).
+        data (list): List of tuples
+        columns (tuple): Tuple of column names
+        file_path (str): Path to the CSV file
     """
 
     now = datetime.datetime.now(TIMEZONE).strftime("%Y-%m-%d-%H:%M:%S")
     try:
-        with open(f"results/{now}.csv", "w", newline="") as csvfile:
+        with open(f"{file_path}/{now}.csv", "w", newline="") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(
-                [
-                    "Test Number",
-                    "Expected Label",
-                    "LLM Result",
-                    "LLM Step by Step Reasoning",
-                    "Prompt Template",
-                    "INSTRUCTION",
-                    "OPTIONS",
-                    "LLM",
-                    "Prompt Number",
-                ]
-            )
+            writer.writerow(columns)
             for row in data:
                 writer.writerow(row)
     except Exception as e:
