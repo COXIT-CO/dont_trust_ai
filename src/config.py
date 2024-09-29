@@ -19,6 +19,7 @@ TIMEZONE_REGION = os.getenv("TIMEZONE_REGION")
 TIMEZONE = pytz.timezone(TIMEZONE_REGION)
 
 os.makedirs("results", exist_ok=True)
+os.makedirs("deepeval_results", exist_ok=True)
 os.makedirs("logs", exist_ok=True)
 
 logging.basicConfig(
