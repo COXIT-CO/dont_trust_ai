@@ -1,3 +1,4 @@
+from json import JSONDecodeError
 from config import get_client, logging
 from openai import APIError
 
@@ -33,7 +34,7 @@ async def llm_call(
                 }
             ],
         )
-    except APIError as e:
+    except (APIError, JSONDecodeError) as e:
         logging.exception(e)
         return index_of_testcase, f":red[Caught an ERROR: {e}]"
 
