@@ -1,4 +1,7 @@
 import asyncio
+import pandas as pd
+from pandas import DataFrame
+
 from openrouter import llm_call
 from utils import get_result_word, save_response_to_csv
 
@@ -11,10 +14,8 @@ async def test_prompt(
     llm_model: str,
     testcases: list[tuple[str, str]]
 ) -> tuple[str, str, int]:
-
     expected_results = []
     llm_ainvokes = []
-
     for index, expected_result, specification in testcases:
         llm_invoke = llm_call(
             llm_model=llm_model,
@@ -63,13 +64,91 @@ async def test_prompt(
                 short_result += f"-\n"
                 short_result += f"\t\t\tTESTCASE-{index}: " + expected_result + "\n"
                 short_result += f"LLM RESPONSE: " + sentence + "\n\n"
-                short_result += (
-                    "Result: **"
-                    + state_of_result
-                    + "**\n\n\n\n"
-                )
+                short_result += "Result: **" + state_of_result + "**\n\n\n\n"
 
             long_result += f"{sentence}\n\n"
         long_result += "Expected RESPONSE: **" + expected_result + "**\n\n\n\n"
-    save_response_to_csv(result_testing_tuples)
+    save_response_to_csv(
+        (
+            "Test Number",
+            "Expected Label",
+            "LLM Result",
+            "LLM Step by Step Reasoning",
+            "Prompt Template",
+            "INSTRUCTION",
+            "OPTIONS",
+            "LLM",
+            "Prompt Number",
+        ),
+        result_testing_tuples,
+    )
     return short_result, long_result, passed_testcases
+
+
+async def get_df_results_of_testing(
+    prompt_template: str,
+    prompt_instruction: str,
+    prompt_options: str,
+    llm_model: str,
+    testcases: list[tuple[str, str, str]],
+) -> DataFrame:
+
+    expected_results = []
+    specifications = []
+    llm_ainvokes = []
+    for index, expected_result, specification in testcases:
+        llm_invoke = llm_call(
+            llm_model=llm_model,
+            index_of_testcase=index,
+            prompt_template=prompt_template,
+            instruction=prompt_instruction,
+            options=prompt_options,
+            input_text=specification,
+        )
+        llm_ainvokes.append(llm_invoke)
+        expected_results.append(expected_result)
+        specifications.append(specification)
+
+    llm_results = await asyncio.gather(*llm_ainvokes)
+
+    testcase_results = list(zip(llm_results, expected_results, specifications))
+
+    result_testing_tuples = []
+
+    for testcase in testcase_results:
+        index, result_from_llm = testcase[0]
+        expected_result = testcase[1]
+        specification = testcase[2]
+        prompt = (
+            prompt_template.format(
+                OPTIONS=prompt_options, INSTRUCTION=prompt_instruction
+            ),
+        )
+        result_testing_tuples.append(
+            (index, prompt, specification, expected_result, result_from_llm, llm_model)
+        )
+
+    save_response_to_csv(
+        (
+            "Test Number",
+            "Prompt",
+            "Specification",
+            "Expected Result",
+            "LLM Response",
+            "LLM Model",
+        ),
+        result_testing_tuples,
+        "deepeval_results"
+    )
+
+    return pd.DataFrame(
+        result_testing_tuples,
+        columns=(
+            "Testcase",
+            "Prompt",
+            "Specification",
+            "Expected Result",
+            "LLM Response",
+            "LLM model",
+        ),
+    )
