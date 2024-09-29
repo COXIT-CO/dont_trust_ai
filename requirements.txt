@@ -53,3 +53,4 @@ tqdm==4.66.5
 typing_extensions==4.12.2
 tzdata==2024.1
 urllib3==2.2.2
+deepeval~=1.1.6
