@@ -102,7 +102,6 @@ def display_metric_results(metrics):
 
         st.write(f"**💡 Reason:** {metric.reason}")
         st.write(f"**💰 Evaluation Cost:** {metric.evaluation_cost:.6f} USD")
-
         st.write(f"**Result:** {status_of_testing}")
         st.write("---")
 
@@ -110,17 +109,24 @@ def display_metric_results(metrics):
 def deepeval_testing_section(prompts_config):
     st.header("Test your LLM responses with custom metrics")
 
+    if "columns_info" not in st.session_state:
+        st.session_state.columns_info = {
+            "input_col_name": "Specification",
+            "actual_output_col_name": "LLM Response",
+            "expected_output_col_name": "Expected Result",
+            "context_col_name": "Prompt",
+            "additional_metadata_col_name": "Testcase",
+        }
     if "metrics_info" not in st.session_state:
         st.session_state.metrics_info = {}
 
     def update_metrics():
-        metrics_info = st.session_state.metrics
-        for metric_name in metrics_info:
+        for metric_name in st.session_state.metrics:
             if metric_name not in st.session_state.metrics_info:
                 st.session_state.metrics_info[metric_name] = 0.5
 
     selected_metrics = st.multiselect(
-        "Choose metrics:", METRICS_DICT, key="metrics", on_change=update_metrics
+        "Choose metrics:", METRICS_DICT.keys(), key="metrics", on_change=update_metrics
     )
 
     if selected_metrics:
@@ -167,12 +173,18 @@ def deepeval_testing_section(prompts_config):
             input_columns,
             key="context_column",
         )
-
+        additional_metadata_col_name = st.selectbox(
+            f"Select Additional Metadata Column",
+            input_columns,
+            key="additional_metadata_col_name",
+        )
         st.session_state.columns_info = {
             "input_col_name": input_col_name,
             "actual_output_col_name": actual_output_col_name,
             "expected_output_col_name": expected_output_col_name,
             "context_col_name": context_col_name,
+            "additional_metadata_col_name": additional_metadata_col_name,
+
         }
     selected_llm = st.selectbox("Choose LLM model: ", OPENROUTER_DEFAULT_LLM_MODELS)
     selected_prompt_number = st.selectbox("Choose prompt:", prompts_config)
@@ -202,11 +214,16 @@ def deepeval_testing_section(prompts_config):
                 columns_dict=st.session_state.columns_info,
             )
 
-            testcases_list = testcases_df["Test Number"].tolist()
+            testcases_metadata_list = []
+            metadata_col_name = st.session_state.columns_info["additional_metadata_col_name"]
+
+            if metadata_col_name:
+                testcases_metadata_list = testcases_df[metadata_col_name].tolist()
             st.subheader(f"Results of evaluating LLM:")
 
             for index, evaluation_result in enumerate(results_of_evaluating_df):
-                st.write(f"-\n\t\t\tTESTCASE-{testcases_list[index]}: ")
+                testcase_metadata = testcases_metadata_list[index] if testcases_metadata_list else index
+                st.write(f"-\n\t\t\tTESTCASE-{testcase_metadata}: ")
                 display_metric_results(evaluation_result.metrics_data)
 
         st.success("✅ㅤCSV Evaluation completed")
@@ -243,16 +260,10 @@ def deepeval_testing_section(prompts_config):
             st.write(f"Results of testing LLM:")
             st.write(results_of_testing_df)
 
-            columns_info = {
-                "input_col_name": "Specification",
-                "actual_output_col_name": "LLM Response",
-                "expected_output_col_name": "Expected Result",
-                "context_col_name": "Prompt",
-            }
             results_of_evaluating_df = test_dataset_with_metrics(
                 results_of_testing_df,
                 metrics_dict=st.session_state.metrics_info,
-                columns_dict=columns_info,
+                columns_dict=st.session_state.columns_info,
             )
 
             testcases_list = results_of_testing_df["Testcase"].tolist()
