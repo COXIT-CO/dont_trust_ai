@@ -5,8 +5,8 @@ import pandas as pd
 from config import OPENROUTER_DEFAULT_LLM_MODELS, PATH_TO_PROMPT_CSV_FILE
 from inputs import TESTCASES_LIST
 from main import test_prompt, get_df_results_of_testing
-from deepeval import test_dataset_with_metrics
-from metrics import METRICS_LIST
+from metrics_evaluation import test_dataset_with_metrics
+from metrics import METRICS_DICT
 from utils import get_prompts_config
 
 
@@ -120,7 +120,7 @@ def deepeval_testing_section(prompts_config):
                 st.session_state.metrics_info[metric_name] = 0.5
 
     selected_metrics = st.multiselect(
-        "Choose metrics:", METRICS_LIST, key="metrics", on_change=update_metrics
+        "Choose metrics:", METRICS_DICT, key="metrics", on_change=update_metrics
     )
 
     if selected_metrics:
@@ -167,7 +167,8 @@ def deepeval_testing_section(prompts_config):
             input_columns,
             key="context_column",
         )
-        columns_info = {
+
+        st.session_state.columns_info = {
             "input_col_name": input_col_name,
             "actual_output_col_name": actual_output_col_name,
             "expected_output_col_name": expected_output_col_name,
@@ -198,7 +199,7 @@ def deepeval_testing_section(prompts_config):
             results_of_evaluating_df = test_dataset_with_metrics(
                 testcases_dataset=testcases_df,
                 metrics_dict=st.session_state.metrics_info,
-                columns_dict=columns_info,
+                columns_dict=st.session_state.columns_info,
             )
 
             testcases_list = testcases_df["Test Number"].tolist()
