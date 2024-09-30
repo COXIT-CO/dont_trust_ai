@@ -103,7 +103,6 @@ async def get_df_results_of_testing(
     llm_model: str,
     testcases: list[tuple[str, str, str]],
 ) -> DataFrame:
-
     expected_results = []
     specifications = []
     llm_ainvokes = []
@@ -140,16 +139,9 @@ async def get_df_results_of_testing(
         )
 
     save_response_to_csv(
-        (
-            "Test Number",
-            "Prompt",
-            "Specification",
-            "Expected Result",
-            "LLM Response",
-            "LLM Model",
-        ),
-        result_testing_tuples,
-        "deepeval_results"
+        data=result_testing_tuples,
+        columns=CSV_HEADERS_DEEPEVAL,
+        file_path="deepeval_results",
     )
 
     return pd.DataFrame(
