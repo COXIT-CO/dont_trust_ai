@@ -7,7 +7,7 @@ from utils import get_result_word, save_response_to_csv
 
 # Constants
 CSV_HEADERS_DEEPEVAL = (
-    "Test Number",
+    "Testcase",
     "Prompt",
     "Specification",
     "Expected Result",
@@ -15,7 +15,7 @@ CSV_HEADERS_DEEPEVAL = (
     "LLM Model",
 )
 CSV_HEADERS_TEST = (
-    "Test Number",
+    "Testcase",
     "Expected Label",
     "LLM Result",
     "LLM Step by Step Reasoning",
