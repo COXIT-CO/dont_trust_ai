@@ -5,6 +5,27 @@ from pandas import DataFrame
 from openrouter import llm_call
 from utils import get_result_word, save_response_to_csv
 
+# Constants
+CSV_HEADERS_DEEPEVAL = (
+    "Test Number",
+    "Prompt",
+    "Specification",
+    "Expected Result",
+    "LLM Response",
+    "LLM Model",
+)
+CSV_HEADERS_TEST = (
+    "Test Number",
+    "Expected Label",
+    "LLM Result",
+    "LLM Step by Step Reasoning",
+    "Prompt Template",
+    "INSTRUCTION",
+    "OPTIONS",
+    "LLM",
+    "Prompt Number",
+)
+
 
 async def test_prompt(
     prompt_number: int,
@@ -69,18 +90,8 @@ async def test_prompt(
             long_result += f"{sentence}\n\n"
         long_result += "Expected RESPONSE: **" + expected_result + "**\n\n\n\n"
     save_response_to_csv(
-        (
-            "Test Number",
-            "Expected Label",
-            "LLM Result",
-            "LLM Step by Step Reasoning",
-            "Prompt Template",
-            "INSTRUCTION",
-            "OPTIONS",
-            "LLM",
-            "Prompt Number",
-        ),
-        result_testing_tuples,
+        data=result_testing_tuples,
+        columns=CSV_HEADERS_TEST
     )
     return short_result, long_result, passed_testcases
 
@@ -142,13 +153,6 @@ async def get_df_results_of_testing(
     )
 
     return pd.DataFrame(
-        result_testing_tuples,
-        columns=(
-            "Testcase",
-            "Prompt",
-            "Specification",
-            "Expected Result",
-            "LLM Response",
-            "LLM model",
-        ),
+        data=result_testing_tuples,
+        columns=CSV_HEADERS_DEEPEVAL
     )
