@@ -26,17 +26,17 @@ class CorrectnessMetric(GEval):
 
     def __init__(self, threshold: float = DEFAULT_THRESHOLD):
         super().__init__(
+            model="gpt-4o-mini",
             name="Correctness",
             criteria="Ensure that the result series match the expected result series.",
             evaluation_steps=[
-                "1. Verify that the core material is correctly chosen according to the expected result.",
-                "2. Verify that the material for fronts is selected correctly, according to the expected result.",
-                "3. Verify that the material for ends is selected correctly, according to the expected result.",
-                "4. Verify that the correct edging is selected, according to the expected result.",
-                "5. Verify that the cabinet edgebanding matches the expected result.",
+                "Verify that the core material is correctly chosen according to the expected result.",
+                "Verify that the material for fronts is selected correctly, according to the expected result.",
+                "Verify that the material for ends is selected correctly, according to the expected result.",
+                "Verify that the correct edging is selected, according to the expected result.",
+                "Verify that the cabinet edgebanding matches the expected result.",
             ],
             evaluation_params=[
-                LLMTestCaseParams.INPUT,
                 LLMTestCaseParams.ACTUAL_OUTPUT,
                 LLMTestCaseParams.EXPECTED_OUTPUT,
             ],
