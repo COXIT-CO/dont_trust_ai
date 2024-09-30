@@ -16,6 +16,7 @@ class CustomEvaluationDataset(EvaluationDataset):
         context_col_delimiter: str = ";",
         retrieval_context_col_name: Optional[str] = None,
         retrieval_context_col_delimiter: str = ";",
+        additional_metadata_col_name: Optional[str] = None,
     ):
         """
         Load test cases from a Pandas Dataframe.
@@ -44,18 +45,27 @@ class CustomEvaluationDataset(EvaluationDataset):
             )
         ]
 
+        additional_metadatas = [
+            {"Testcase": str(metadata)} if metadata else None
+            for metadata in get_column_data(
+                df, additional_metadata_col_name, default=""
+            )
+        ]
+
         for (
             input,
             actual_output,
             expected_output,
             context,
             retrieval_context,
+            additional_metadata,
         ) in zip(
             inputs,
             actual_outputs,
             expected_outputs,
             contexts,
             retrieval_contexts,
+            additional_metadatas,
         ):
             self.add_test_case(
                 LLMTestCase(
@@ -64,5 +74,6 @@ class CustomEvaluationDataset(EvaluationDataset):
                     expected_output=expected_output,
                     context=context,
                     retrieval_context=retrieval_context,
+                    additional_metadata=additional_metadata,
                 )
             )
