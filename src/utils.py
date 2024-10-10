@@ -1,6 +1,18 @@
 import csv
 import datetime
-from config import TIMEZONE, logging
+
+import asyncio
+
+from config import TIMEZONE, logging, PRICES_PER_1000_TOKEN
+
+
+def run_async_in_sync(function, *args, **kwargs):
+    """
+    Function to run the async code within the synchronous context
+    """
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    return loop.run_until_complete(function(*args, **kwargs))
 
 
 def read_testcases_from_csv(file_path) -> list:
@@ -76,16 +88,6 @@ def save_response_to_csv(columns: tuple, data: list[tuple], file_path: str = "re
         logging.exception(f"An error occurred: {e}")
 
 
-def get_result_word(expected: str, obtained: str):
-    """
-    Compare if expected sentence is in obtained
-    and return the result word in Streamlit format
-    """
-    if expected in obtained:
-        return ":green[success]"
-    return ":red[failed]"
-
-
 def get_prompts_config(file_path: str):
     """
     Create prompts config dictionary from CSV file.
@@ -100,3 +102,17 @@ def get_prompts_config(file_path: str):
         for number, prompt_template, options, instruction in prompts_config_tuples
     }
     return prompts_config
+
+
+def calculate_llm_call_cost(model_name, input_tokens, output_tokens):
+    if model_name not in PRICES_PER_1000_TOKEN:
+        return 0
+
+    input_price_per_1000 = PRICES_PER_1000_TOKEN[model_name]["input"]
+    output_price_per_1000 = PRICES_PER_1000_TOKEN[model_name]["output"]
+
+    input_cost = (input_tokens / 1000) * input_price_per_1000
+    output_cost = (output_tokens / 1000) * output_price_per_1000
+    total_cost = input_cost + output_cost
+
+    return round(total_cost, 4)
