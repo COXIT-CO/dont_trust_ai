@@ -44,9 +44,40 @@ class CorrectnessMetric(GEval):
         )
 
 
+class CorrectnessMetricForTestingCI(GEval):
+    """
+    Metric for evaluating correctness by ensuring that the selected
+    result matches the expected result based on a series of material
+    selection steps.
+    """
+
+    def __init__(self, threshold: float = DEFAULT_THRESHOLD):
+        super().__init__(
+            model="gpt-4o-mini",
+            name="Correctness",
+            criteria="Ensure the result series extracted from the LLM's matches the expected result series.",
+            evaluation_steps=[
+                "Extract the expected result series from options.",
+                "Extract the result series from the LLM's response.",
+                "Verify that the core material is correctly chosen according to the expected result.",
+                "Verify that the material for fronts is selected correctly, according to the expected result.",
+                "Verify that the material for ends is selected correctly, according to the expected result.",
+                "Verify that the correct edging is selected, according to the expected result.",
+                "Verify that the cabinet edgebanding matches the expected result.",
+            ],
+            evaluation_params=[
+                LLMTestCaseParams.ACTUAL_OUTPUT,
+                LLMTestCaseParams.EXPECTED_OUTPUT,
+                LLMTestCaseParams.CONTEXT
+            ],
+            threshold=threshold,
+        )
+
+
 # List of available metrics
 METRICS_DICT = {
     "Correctness": CorrectnessMetric,
+    "Correctness CI testing": CorrectnessMetricForTestingCI,
     "Answer Relevancy": AnswerRelevancyMetric,
     "Faithfulness": FaithfulnessMetric,
     "Hallucination": HallucinationMetric,
@@ -74,5 +105,3 @@ def get_selected_metrics(selected_metrics: dict):
         METRICS_DICT[metric](threshold=threshold)
         for metric, threshold in selected_metrics.items()
     ]
-
-
