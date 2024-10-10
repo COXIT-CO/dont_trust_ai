@@ -1,11 +1,11 @@
 import logging
 import os
 import pytz
+
 from datetime import datetime
-from openai import AsyncOpenAI
 from dotenv import load_dotenv
 
-from utils import read_testcases_from_csv
+from csv_utils import read_testcases_from_csv
 
 load_dotenv()
 
@@ -87,9 +87,4 @@ PRICES_PER_1000_TOKEN = {
 }
 
 
-# Function for getting async OpenAI client
-def get_openai_client() -> AsyncOpenAI:
-    return AsyncOpenAI(
-        base_url=OPENROUTER_BASE_URL,
-        api_key=OPENROUTER_API_KEY,
-    )
+
