@@ -2,7 +2,7 @@ import asyncio
 import pandas as pd
 from pandas import DataFrame
 
-from utils import save_response_to_csv
+from csv_utils import save_response_to_csv
 from streamlit_tools import get_result_word
 from config import CSV_HEADERS_PROMPT_TESTING, CSV_HEADERS_DEEPEVAL_TESTING
 from llm_calls import (
