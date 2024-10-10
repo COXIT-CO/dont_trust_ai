@@ -1,11 +1,8 @@
 import logging
 import os
 import pytz
-
 from datetime import datetime
 from dotenv import load_dotenv
-
-from csv_utils import read_testcases_from_csv
 
 load_dotenv()
 
@@ -33,8 +30,6 @@ logging.basicConfig(
     datefmt="%m/%d/%Y %I:%M:%S %p",
 )
 
-# Get testcases list from input csv file
-TESTCASES_LIST = read_testcases_from_csv(PATH_TO_TESTCASES_CSV_FILE)
 
 # Constants for manual deepeval testing
 DEFAULT_INPUT_COL_NAME = "Specification"
