@@ -10,8 +10,7 @@ from openai.types.chat import ChatCompletion
 from langsmith import traceable, get_current_run_tree
 from langsmith.wrappers import wrap_openai
 
-from config import get_openai_client
-from utils import calculate_llm_call_cost
+from utils import calculate_llm_call_cost, get_openai_client
 
 
 async def base_llm_call(
