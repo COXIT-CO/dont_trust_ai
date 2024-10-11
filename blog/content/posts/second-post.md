@@ -35,7 +35,7 @@ Before proceeding with the itinerary, please ask for any clarifications or addit
 I will give more info if you need.
 ```
 **Result:**
-![img_1.png](../../public/images/prompt_engineering/img_1.png)
+![img_1.png](public/images/prompt_engineering/img_1.png)
 
 When applying this technique, we ask the LLM to identify specific areas where it may be uncertain or confused in resolving a test case. By doing so, we can pinpoint where hallucinations occur, understand why the LLM struggles with certain choices, and refine the prompt in those areas where the model tends to get confused. This method is highly effective in improving the quality of the instructions provided in the prompt.
 
