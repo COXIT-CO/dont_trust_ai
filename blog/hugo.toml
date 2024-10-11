@@ -1,0 +1,4 @@
+baseURL = 'https://coxit.co/'
+languageCode = 'en-us'
+title = 'LLM Integrations Research Blog by COXIT'
+theme = 'papermod'
