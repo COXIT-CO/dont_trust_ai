@@ -14,7 +14,7 @@ Language models (LLMs) are powerful tools for a variety of tasks, but their effe
 Instruction order plays a crucial role in prompt engineering. Altering the sequence of instructions or actions can drastically change the outcome produced by the LLM. For instance, when we previously placed an instruction about not considering "semi-exposed surfaces" as the eleventh step, the LLM would still process these surfaces as it followed each step sequentially, reaching the exclusion instruction too late to apply it effectively. However, when this instruction was moved to precede all other steps, the LLM correctly disregarded "semi-exposed" surfaces. This demonstrates the necessity of positioning general concepts or definitions above the specific step-by-step instructions, ensuring they are applied throughout the process.
 
 Example:
-![img.png](../../public/images/prompt_engineering/img.png)
+![img.png](/home/runner/work/dont_trust_ai/dont_trust_ai/blog/public/images/prompt_engineering/img.png)
 
 # 3. The "Ask Before Answer" Technique
 The "Ask Before Answer" technique is particularly effective when optimizing prompts to reduce the occurrence of hallucinations. By prompting the LLM to seek clarification before resolving a task, we can preempt misunderstandings that might lead to incorrect answers.
@@ -35,14 +35,14 @@ Before proceeding with the itinerary, please ask for any clarifications or addit
 I will give more info if you need.
 ```
 **Result:**
-![img_1.png](public/images/prompt_engineering/img_1.png)
+![img_1.png](/home/runner/work/dont_trust_ai/blog/public/images/prompt_engineering/img_1.png)
 
 When applying this technique, we ask the LLM to identify specific areas where it may be uncertain or confused in resolving a test case. By doing so, we can pinpoint where hallucinations occur, understand why the LLM struggles with certain choices, and refine the prompt in those areas where the model tends to get confused. This method is highly effective in improving the quality of the instructions provided in the prompt.
 
 # 4. The Chain of Thoughts (CoT) Technique
 
 **Result without CoT:**
-![img_2.png](../../public/images/prompt_engineering/img_2.png)
+![img_2.png](../public/images/prompt_engineering/img_2.png)
 
 One of the most critical steps in creating an effective prompt with complex instructions is the use of the Chain of Thoughts (CoT) technique. By including phrases like "You think step by step," "Take your time," or "Explain every step," the LLM is given time to reflect and process all input data. This approach significantly improves the results, making them more logical and coherent. However, caution is needed when using "Explain every step," as the LLM can sometimes provide the most likely correct answers without fully understanding why, leading to hallucinations.
 
