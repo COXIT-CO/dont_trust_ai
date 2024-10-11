@@ -14,7 +14,7 @@ Language models (LLMs) are powerful tools for a variety of tasks, but their effe
 Instruction order plays a crucial role in prompt engineering. Altering the sequence of instructions or actions can drastically change the outcome produced by the LLM. For instance, when we previously placed an instruction about not considering "semi-exposed surfaces" as the eleventh step, the LLM would still process these surfaces as it followed each step sequentially, reaching the exclusion instruction too late to apply it effectively. However, when this instruction was moved to precede all other steps, the LLM correctly disregarded "semi-exposed" surfaces. This demonstrates the necessity of positioning general concepts or definitions above the specific step-by-step instructions, ensuring they are applied throughout the process.
 
 Example:
-![img.png](/home/runner/work/dont_trust_ai/dont_trust_ai/blog/public/images/prompt_engineering/img.png)
+![img_1.png](https://coxit-co.github.io/dont_trust_ai/blog/content/posts/img.png)
 
 # 3. The "Ask Before Answer" Technique
 The "Ask Before Answer" technique is particularly effective when optimizing prompts to reduce the occurrence of hallucinations. By prompting the LLM to seek clarification before resolving a task, we can preempt misunderstandings that might lead to incorrect answers.
