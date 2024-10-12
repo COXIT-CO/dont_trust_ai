@@ -55,7 +55,8 @@ Meta-prompting is an advanced technique in prompt engineering that goes beyond m
 When applied in Claude LLM, meta-prompting proved to be more effective than in GPT models. It significantly improved test case outcomes by making instructions simpler and clearer for the model to understand. Claude's advanced processing capabilities allowed it to better interpret and act on the meta-prompts, leading to more accurate and consistent results.
 
 **Example how meta-prompting optimized Claude outputs:**
-![img_4.png](https://ibb.co/YkcwBwS)
+![img_4.png](https://i.ibb.co/7WnLtLD/img-4.png)
+<a href="https://ibb.co/YkcwBwS"><img src="https://i.ibb.co/7WnLtLD/img-4.png" alt="img-4" border="0"></a>
 
 However, in our specific case, meta-prompting did not lead to the exceptional results we had hoped for. While it is a valuable technique, its effectiveness can vary depending on the complexity of the task and the model's inherent capabilities.
 
