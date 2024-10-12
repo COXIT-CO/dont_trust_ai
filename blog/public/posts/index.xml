@@ -1,22 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on LLM Integrations Research Blog by COXIT</title>
     <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on LLM Integrations Research Blog by COXIT</description>
-    <generator>Hugo -- 0.135.0</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Oct 2024 19:19:14 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 12 Oct 2024 13:52:37 +0300</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Second Post</title>
+      <link>http://localhost:1313/posts/my-second-post/</link>
+      <pubDate>Sat, 12 Oct 2024 13:52:37 +0300</pubDate>
+      <guid>http://localhost:1313/posts/my-second-post/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/10pz3nPghcG3tyN9RuzrNerfcbeP59kq1YJRXjBApTQY/edit&#34;&gt;Prompt Engineering through Structured Instructions and Advanced Techniques is described on Google Docs with photo exapmles&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;1-introduction&#34;&gt;1. Introduction&lt;/h1&gt;&#xA;&lt;p&gt;Language models (LLMs) are powerful tools for a variety of tasks, but their effectiveness is highly dependent on the design of prompts. This article examines advanced techniques in prompt engineering, focusing on the impact of instruction order, the &amp;ldquo;Ask Before Answer&amp;rdquo; technique, and the &amp;ldquo;Chain of Thoughts&amp;rdquo; (CoT) method, etc. By optimizing these factors, we can significantly enhance the accuracy and reliability of LLM outputs.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Welcome To LLM Integrations Research Blog by COXIT</title>
       <link>http://localhost:1313/posts/my-first-post/</link>
       <pubDate>Thu, 10 Oct 2024 19:19:14 +0300</pubDate>
       <guid>http://localhost:1313/posts/my-first-post/</guid>
-      <description>&lt;h3 id=&#34;welcome&#34;&gt;Welcome&lt;/h3&gt;
-&lt;p&gt;Welcome to the internal COXIT blog about Prompt Engeneering and LLM integrations.&lt;/p&gt;
-&lt;p&gt;This is COXIT&amp;rsquo;s internal R&amp;amp;D project. We aim to investigate different tools, approaches, and prompt engineering techniques for building LLM-powered production-ready solutions. We aim to try different tools currently known on the market and define what works and what causes any problems for our specific use cases.&lt;/p&gt;
-&lt;p&gt;As a result of this project, we will build a knowledge base describing which of the available LLM evaluation tools, frameworks, LLMs themselves, and prompt engineering techniques worked best for our specific LLM-related cases, explain what didn&amp;rsquo;t work, and why.&lt;/p&gt;</description>
+      <description>&lt;h3 id=&#34;welcome&#34;&gt;Welcome&lt;/h3&gt;&#xA;&lt;p&gt;Welcome to the internal COXIT blog about Prompt Engeneering and LLM integrations.&lt;/p&gt;&#xA;&lt;p&gt;This is COXIT&amp;rsquo;s internal R&amp;amp;D project. We aim to investigate different tools, approaches, and prompt engineering techniques for building LLM-powered production-ready solutions. We aim to try different tools currently known on the market and define what works and what causes any problems for our specific use cases.&lt;/p&gt;&#xA;&lt;p&gt;As a result of this project, we will build a knowledge base describing which of the available LLM evaluation tools, frameworks, LLMs themselves, and prompt engineering techniques worked best for our specific LLM-related cases, explain what didn&amp;rsquo;t work, and why.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Prompt Engineering through Structured Instructions and Advanced Techniques</title>
+      <link>http://localhost:1313/posts/my-second-post/my-second-post/</link>
+      <pubDate>Thu, 10 Oct 2024 11:59:14 +0300</pubDate>
+      <guid>http://localhost:1313/posts/my-second-post/my-second-post/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/10pz3nPghcG3tyN9RuzrNerfcbeP59kq1YJRXjBApTQY/edit&#34;&gt;Prompt Engineering through Structured Instructions and Advanced Techniques is described on Google Docs with photo exapmles&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;1-introduction&#34;&gt;1. Introduction&lt;/h1&gt;&#xA;&lt;p&gt;Language models (LLMs) are powerful tools for a variety of tasks, but their effectiveness is highly dependent on the design of prompts. This article examines advanced techniques in prompt engineering, focusing on the impact of instruction order, the &amp;ldquo;Ask Before Answer&amp;rdquo; technique, and the &amp;ldquo;Chain of Thoughts&amp;rdquo; (CoT) method, etc. By optimizing these factors, we can significantly enhance the accuracy and reliability of LLM outputs.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Prompt Engineering through Structured Instructions and Advanced Techniques</title>
+      <link>http://localhost:1313/posts/second-post/</link>
+      <pubDate>Thu, 10 Oct 2024 11:59:14 +0300</pubDate>
+      <guid>http://localhost:1313/posts/second-post/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/10pz3nPghcG3tyN9RuzrNerfcbeP59kq1YJRXjBApTQY/edit&#34;&gt;Prompt Engineering through Structured Instructions and Advanced Techniques is described on Google Docs with photo exapmles&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;1-introduction&#34;&gt;1. Introduction&lt;/h1&gt;&#xA;&lt;p&gt;Language models (LLMs) are powerful tools for a variety of tasks, but their effectiveness is highly dependent on the design of prompts. This article examines advanced techniques in prompt engineering, focusing on the impact of instruction order, the &amp;ldquo;Ask Before Answer&amp;rdquo; technique, and the &amp;ldquo;Chain of Thoughts&amp;rdquo; (CoT) method, etc. By optimizing these factors, we can significantly enhance the accuracy and reliability of LLM outputs.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
