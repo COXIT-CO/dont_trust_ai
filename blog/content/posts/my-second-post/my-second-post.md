@@ -17,15 +17,16 @@ Example:
 
 markdown format:
 ![img.png](img.png)
+![img.png](/images/img.png)
 
 figure tag format:
 {{< figure src="img_1.png" title="Назва зображення" >}}
 
 img tag format (absolute link):
-< img src="/images/img_1.png" alt="Опис зображення" >
+<img src="/images/img_1.png" alt="Опис зображення" >
 
 img tag format (relative link):
-< img src="img_1.png" alt="Опис зображення" >
+<img src="img_1.png" alt="Опис зображення" >
 
 # 3. The "Ask Before Answer" Technique
 The "Ask Before Answer" technique is particularly effective when optimizing prompts to reduce the occurrence of hallucinations. By prompting the LLM to seek clarification before resolving a task, we can preempt misunderstandings that might lead to incorrect answers.
