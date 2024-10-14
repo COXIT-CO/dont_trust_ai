@@ -1,7 +1,7 @@
 +++
 title = 'Prompt Engineering through Structured Instructions and Advanced Techniques'
 date = 2024-10-10T11:59:14+03:00
-draft = false
+draft = true
 author = 'Yaroslav Biziuk'
 +++
 
@@ -14,7 +14,18 @@ Language models (LLMs) are powerful tools for a variety of tasks, but their effe
 Instruction order plays a crucial role in prompt engineering. Altering the sequence of instructions or actions can drastically change the outcome produced by the LLM. For instance, when we previously placed an instruction about not considering "semi-exposed surfaces" as the eleventh step, the LLM would still process these surfaces as it followed each step sequentially, reaching the exclusion instruction too late to apply it effectively. However, when this instruction was moved to precede all other steps, the LLM correctly disregarded "semi-exposed" surfaces. This demonstrates the necessity of positioning general concepts or definitions above the specific step-by-step instructions, ensuring they are applied throughout the process.
 
 Example:
+
+markdown format:
 ![img.png](img.png)
+
+figure tag format:
+{{< figure src="img_1.png" title="Назва зображення" >}}
+
+img tag format (absolute link):
+{{< img src="/images/img_1.png" alt="Опис зображення" >}}
+
+img tag format (relative link):
+{{< img src="img_1.png" alt="Опис зображення" >}}
 
 # 3. The "Ask Before Answer" Technique
 The "Ask Before Answer" technique is particularly effective when optimizing prompts to reduce the occurrence of hallucinations. By prompting the LLM to seek clarification before resolving a task, we can preempt misunderstandings that might lead to incorrect answers.
@@ -36,6 +47,7 @@ I will give more info if you need.
 ```
 **Result:**
 ![img_1.png](img_1.png)
+{{< figure src="/images/img_1.png" title="Назва зображення" >}}
 
 When applying this technique, we ask the LLM to identify specific areas where it may be uncertain or confused in resolving a test case. By doing so, we can pinpoint where hallucinations occur, understand why the LLM struggles with certain choices, and refine the prompt in those areas where the model tends to get confused. This method is highly effective in improving the quality of the instructions provided in the prompt.
 
@@ -43,6 +55,7 @@ When applying this technique, we ask the LLM to identify specific areas where it
 
 **Result without CoT:**
 ![img_2.png](img_2.png)
+{{< figure src="/images/img_2.png" title="Назва зображення" >}}
 
 One of the most critical steps in creating an effective prompt with complex instructions is the use of the Chain of Thoughts (CoT) technique. By including phrases like "You think step by step," "Take your time," or "Explain every step," the LLM is given time to reflect and process all input data. This approach significantly improves the results, making them more logical and coherent. However, caution is needed when using "Explain every step," as the LLM can sometimes provide the most likely correct answers without fully understanding why, leading to hallucinations.
 
@@ -56,7 +69,6 @@ When applied in Claude LLM, meta-prompting proved to be more effective than in G
 
 **Example how meta-prompting optimized Claude outputs:**
 ![img_4.png](https://i.ibb.co/7WnLtLD/img-4.png)
-<a href="https://ibb.co/YkcwBwS"><img src="https://i.ibb.co/7WnLtLD/img-4.png" alt="img-4" border="0"></a>
 
 However, in our specific case, meta-prompting did not lead to the exceptional results we had hoped for. While it is a valuable technique, its effectiveness can vary depending on the complexity of the task and the model's inherent capabilities.
 
