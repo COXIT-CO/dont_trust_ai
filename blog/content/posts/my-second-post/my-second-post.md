@@ -15,7 +15,6 @@ Instruction order plays a crucial role in prompt engineering. Altering the seque
 
 Example:
 
-markdown format:
 ![img.png](/dont_trust_ai/posts/my-second-post/img.png)
 
 # 3. The "Ask Before Answer" Technique
@@ -37,6 +36,7 @@ Before proceeding with the itinerary, please ask for any clarifications or addit
 I will give more info if you need.
 ```
 **Result:**
+
 ![img_1.png](/dont_trust_ai/posts/my-second-post/img_1.png)
 
 
@@ -45,12 +45,14 @@ When applying this technique, we ask the LLM to identify specific areas where it
 # 4. The Chain of Thoughts (CoT) Technique
 
 **Result without CoT:**
+
 ![img_2.png](/dont_trust_ai/posts/my-second-post/img_2.png)
-{{< figure src="/images/img_2.png" title="Назва зображення" >}}
+
 
 One of the most critical steps in creating an effective prompt with complex instructions is the use of the Chain of Thoughts (CoT) technique. By including phrases like "You think step by step," "Take your time," or "Explain every step," the LLM is given time to reflect and process all input data. This approach significantly improves the results, making them more logical and coherent. However, caution is needed when using "Explain every step," as the LLM can sometimes provide the most likely correct answers without fully understanding why, leading to hallucinations.
 
 **Result with CoT:**
+
 ![img_3.png](/dont_trust_ai/posts/my-second-post/img_3.png)
 
 # 5. Meta-Prompting: An Advanced Strategy in Prompt Engineering
@@ -59,7 +61,8 @@ Meta-prompting is an advanced technique in prompt engineering that goes beyond m
 When applied in Claude LLM, meta-prompting proved to be more effective than in GPT models. It significantly improved test case outcomes by making instructions simpler and clearer for the model to understand. Claude's advanced processing capabilities allowed it to better interpret and act on the meta-prompts, leading to more accurate and consistent results.
 
 **Example how meta-prompting optimized Claude outputs:**
-![img_4.png](/dont_trust_ai/posts/my-second-post/img-4.png)
+
+![img_4.png](/dont_trust_ai/posts/my-second-post/img_4.png)
 
 However, in our specific case, meta-prompting did not lead to the exceptional results we had hoped for. While it is a valuable technique, its effectiveness can vary depending on the complexity of the task and the model's inherent capabilities.
 
@@ -91,8 +94,8 @@ An important aspect of creating effective prompts is assigning a specific role t
 
 **Example:**
 
-- **Worse:** "You are a Casework expert."
-- **Better:** "You are a Casework expert tasked with reviewing a specification and selecting the correct Series option that represents cabinet materials and thickness."
+- **<p style="color:#FF3131;display:inline">Worse:</p>** "You are a Casework expert."
+- **<p style="color:#228B22;display:inline">Better:</p>** "You are a Casework expert tasked with reviewing a specification and selecting the correct Series option that represents cabinet materials and thickness."
 
 This role-based approach provides the LLM with a clear context and specific guidelines, which positively influences the accuracy and relevance of the model's responses.
 
