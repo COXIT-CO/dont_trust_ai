@@ -23,6 +23,7 @@ hugo server -D
 
 ### Tech Stack
 
+
 This blog is powered by [hugo](https://gohugo.io/) + github actions + github pages. 
 
 Pages are simple markdown, so github preview functionality is sufficient.
