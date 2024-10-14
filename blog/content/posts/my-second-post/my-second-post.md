@@ -22,6 +22,8 @@ markdown format:
 figure tag format:
 {{< figure src="img_1.png" title="Назва зображення" >}}
 
+{{< figure src="/images/img_1.png" title="Назва зображення" >}}
+
 img tag format (absolute link):
 <img src="/images/img_1.png" alt="Опис зображення" >
 
