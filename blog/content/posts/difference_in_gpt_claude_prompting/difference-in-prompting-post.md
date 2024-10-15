@@ -5,9 +5,6 @@ draft = false
 author = 'Yaroslav Biziuk'
 +++
 
-
-# Differences in Prompting Techniques: Claude vs. GPT
-
 ## 1. Introduction
 
 When working with language models (LLMs) like Claude and GPT, the effectiveness of prompts can vary significantly based on the model's architecture and capabilities. This article explores key differences in prompting strategies for Claude and GPT, using advanced techniques such as meta-prompting, XML tagging, and the Chain of Thoughts (CoT) method. By understanding these differences, users can optimize their prompts to enhance the accuracy and reliability of LLM outputs.
