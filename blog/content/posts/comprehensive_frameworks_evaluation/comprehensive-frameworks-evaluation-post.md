@@ -1,27 +1,28 @@
 +++
-title = 'Third Post'
+title = 'Langsmith vs OpenAI Evals vs DeepEval: A Comprehensive Evaluation'
 date = 2024-10-14T12:35:30+03:00
 draft = false
+author = 'Yaroslav Biziuk'
 +++
 
 
-# Evaluation and Testing of Langsmith, OpenAI Evals, and DeepEval
+# Langsmith vs OpenAI Evals vs DeepEval: A Comprehensive Evaluation
 
 ## Evaluating and Testing
 
 Langsmith offers an online UI for prompt testing using either a custom dataset or manual inputs. This feature is particularly convenient because it allows users to store prompts along with their commit history and test results. Unfortunately, in DeepEval, testing cannot be done directly through the UI. Instead, users must use code to create `TestCase` objects and evaluate the results through the UI. Also OpenAI provides a powerful SDK for evaluating prompts. However, it requires a bit more setup.
 
 
-![img_1.png](img_1.png)
+![img_1.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_1.png)
 
 *Picture 1. Prompt saved in Langsmith*
 
-![img_2.png](img_2.png)  
+![img_2.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_2.png)  
 
 *Picture 2. Langsmith SDK for testing*  
 
-![img_3.png](img_3.png)
-![img_3_1.png](img_3_1.png)
+![img_3.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_3.png)
+![img_3_1.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_3_1.png)
 
 *Picture 3. OpenAI SDK for testing and evaluating*
 
@@ -29,15 +30,15 @@ Langsmith offers an online UI for prompt testing using either a custom dataset o
 
 Metrics are crucial for evaluating LLM performance. All three frameworks—Langsmith, OpenAI Evals, and DeepEval—support both default metrics and custom metric creation. Here is how it's implemented across the frameworks:
 
-![img_4.png](img_4.png)
+![img_4.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_4.png)
 
 *Picture 4. Default metrics in Langsmith*  
 
-![img_5.png](img_5.png) 
+![img_5.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_5.png) 
 
 *Picture 5. Creating custom metrics in Langsmith* 
 
-![img_6.png](img_6.png)
+![img_6.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_6.png)
 
 *Picture 6. Default metrics in DeepEval*  
 ...  
@@ -176,7 +177,7 @@ return llm_response, response_id
 *Picture 26. Monitoring DeepEval LLM calls filtered by feedback*  
 
 
-![img_27.png](img_27.png) 
+![img_27.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_27.png) 
 
 *Picture 27. Detail feedback page in DeepEval*
 
@@ -184,12 +185,12 @@ return llm_response, response_id
 
 ### LangSmith Pricing
 
-![img.png](img_28.png)
+![img.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_28.png)
 *Picture 28. LangSmith Pricing*
 
 ### DeepEval Pricing
 
-![img.png](img_29.png)...  
+![img.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_29.png)
 *Picture 29. DeepEval Pricing*
 
 ## Overall Conclusion

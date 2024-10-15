@@ -5,8 +5,6 @@ draft = false
 author = 'Yaroslav Biziuk'
 +++
 
-[Prompt Engineering through Structured Instructions and Advanced Techniques is described on Google Docs with photo exapmles](https://docs.google.com/document/d/10pz3nPghcG3tyN9RuzrNerfcbeP59kq1YJRXjBApTQY/edit)
-
 # 1. Introduction
 Language models (LLMs) are powerful tools for a variety of tasks, but their effectiveness is highly dependent on the design of prompts. This article examines advanced techniques in prompt engineering, focusing on the impact of instruction order, the "Ask Before Answer" technique, and the "Chain of Thoughts" (CoT) method, etc. By optimizing these factors, we can significantly enhance the accuracy and reliability of LLM outputs.
 
@@ -15,7 +13,7 @@ Instruction order plays a crucial role in prompt engineering. Altering the seque
 
 Example:
 
-![img.png](/dont_trust_ai/posts/my-second-post/img.png)
+![img.png](/dont_trust_ai/posts/prompt_engineering/img.png)
 
 # 3. The "Ask Before Answer" Technique
 The "Ask Before Answer" technique is particularly effective when optimizing prompts to reduce the occurrence of hallucinations. By prompting the LLM to seek clarification before resolving a task, we can preempt misunderstandings that might lead to incorrect answers.
@@ -37,7 +35,7 @@ I will give more info if you need.
 ```
 **Result:**
 
-![img_1.png](/dont_trust_ai/posts/my-second-post/img_1.png)
+![img_1.png](/dont_trust_ai/posts/prompt_engineering/img_1.png)
 
 
 When applying this technique, we ask the LLM to identify specific areas where it may be uncertain or confused in resolving a test case. By doing so, we can pinpoint where hallucinations occur, understand why the LLM struggles with certain choices, and refine the prompt in those areas where the model tends to get confused. This method is highly effective in improving the quality of the instructions provided in the prompt.
@@ -46,14 +44,14 @@ When applying this technique, we ask the LLM to identify specific areas where it
 
 **Result without CoT:**
 
-![img_2.png](/dont_trust_ai/posts/my-second-post/img_2.png)
+![img_2.png](/dont_trust_ai/posts/prompt_engineering/img_2.png)
 
 
 One of the most critical steps in creating an effective prompt with complex instructions is the use of the Chain of Thoughts (CoT) technique. By including phrases like "You think step by step," "Take your time," or "Explain every step," the LLM is given time to reflect and process all input data. This approach significantly improves the results, making them more logical and coherent. However, caution is needed when using "Explain every step," as the LLM can sometimes provide the most likely correct answers without fully understanding why, leading to hallucinations.
 
 **Result with CoT:**
 
-![img_3.png](/dont_trust_ai/posts/my-second-post/img_3.png)
+![img_3.png](/dont_trust_ai/posts/prompt_engineering/img_3.png)
 
 # 5. Meta-Prompting: An Advanced Strategy in Prompt Engineering
 Meta-prompting is an advanced technique in prompt engineering that goes beyond merely guiding a language model (LLM) through a task. It involves crafting prompts that instruct the model on how to think or approach a problem before the primary task begins. This strategic layer of prompting enhances the LLM's ability to navigate complex instructions by embedding a meta-level understanding of the task at hand. For example, instead of directly asking the LLM to solve a problem, a meta-prompt might instruct the model to first assess whether it fully understands the task, identify potential ambiguities, and request clarification if necessary.
@@ -62,7 +60,7 @@ When applied in Claude LLM, meta-prompting proved to be more effective than in G
 
 **Example how meta-prompting optimized Claude outputs:**
 
-![img_4.png](/dont_trust_ai/posts/my-second-post/img_4.png)
+![img_4.png](/dont_trust_ai/posts/prompt_engineering/img_4.png)
 
 However, in our specific case, meta-prompting did not lead to the exceptional results we had hoped for. While it is a valuable technique, its effectiveness can vary depending on the complexity of the task and the model's inherent capabilities.
 
