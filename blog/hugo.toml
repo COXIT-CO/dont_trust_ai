@@ -2,5 +2,6 @@ baseURL = 'https://coxit.co/'
 languageCode = 'en-us'
 title = 'LLM Integrations Research Blog by COXIT'
 theme = 'papermod'
+
 [outputs]
 home = ["HTML", "JSON"]  # Adds JSON output for the home page
