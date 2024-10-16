@@ -3,8 +3,6 @@ title = 'Welcome To LLM Integrations Research Blog by COXIT'
 date = 2024-10-15T13:45:14+03:00
 draft = false
 author = 'Iryna Mykytyn'
-layout = 'search' # necessary for search
-placeholder = '...'
 +++
 
 ### Welcome 
