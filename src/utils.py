@@ -1,114 +1,50 @@
-import csv
-import datetime
-from config import TIMEZONE, logging
+import asyncio
+
+from openai import AsyncOpenAI
+
+from config import PRICES_PER_1000_TOKEN, OPENROUTER_BASE_URL, OPENROUTER_API_KEY
 
 
-def read_testcases_from_csv(file_path) -> list:
+def run_async_in_sync(function, *args, **kwargs):
     """
-    Reads a CSV file and returns a list of tuples (index, label, specification).
-
-    Args:
-        file_path (str): Path to the CSV file.
-
-    Returns:
-        list: List of tuples (index, label, specification).
+    Function to run the async code within the synchronous context
     """
-    result = []
-
-    try:
-        with open(file_path, "r") as csvfile:
-            reader = csv.reader(csvfile)
-            for row in reader:
-                index, label, specification = row
-                result.append((index.strip(), label.strip(), specification.strip()))
-    except FileNotFoundError:
-        logging.exception(f"File '{file_path}' not found.")
-    return result[1:]
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    return loop.run_until_complete(function(*args, **kwargs))
 
 
-def read_prompts_from_csv(file_path) -> list:
+def get_openai_client() -> AsyncOpenAI:
     """
-    Reads a CSV file and returns a list of tuples (number, prompt_template, options, instruction).
-
-    Args:
-        file_path (str): Path to the CSV file.
-
-    Returns:
-        list: List of tuples (number, prompt_template, options, instruction).
+    Function for getting async OpenAI client
     """
-    result = []
-    try:
-        with open(file_path, "r") as csvfile:
-            reader = csv.reader(csvfile)
-            for row in reader:
-                number, prompt_template, options, instruction = row
-                result.append(
-                    (
-                        number.strip(),
-                        prompt_template.strip(),
-                        options.strip(),
-                        instruction.strip(),
-                    )
-                )
-    except FileNotFoundError:
-        logging.exception(f"File '{file_path}' not found.")
-    return result[1:]
+    return AsyncOpenAI(
+        base_url=OPENROUTER_BASE_URL,
+        api_key=OPENROUTER_API_KEY,
+    )
 
 
-def save_response_to_csv(data: list[tuple]):
+def calculate_llm_call_cost(model_name, input_tokens, output_tokens):
     """
-    Writes a list of tuples to a CSV file.
+       Calculates the total cost of an LLM API call based on token usage.
 
-    Args:
-        data (list): List of tuples (
-            ('Test Number', 'Expected Label', 'LLM Result', 'LLM Step by Step Reasoning', 'LLM', 'Prompt Number')
-        ).
-    """
+       Args:
+           model_name (str): The name of the model being used.
+           input_tokens (int): The number of input tokens.
+           output_tokens (int): The number of output tokens.
 
-    now = datetime.datetime.now(TIMEZONE).strftime("%Y-%m-%d-%H:%M:%S")
-    try:
-        with open(f"results/{now}.csv", "w", newline="") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(
-                [
-                    "Test Number",
-                    "Expected Label",
-                    "LLM Result",
-                    "LLM Step by Step Reasoning",
-                    "Prompt Template",
-                    "INSTRUCTION",
-                    "OPTIONS",
-                    "LLM",
-                    "Prompt Number",
-                ]
-            )
-            for row in data:
-                writer.writerow(row)
-    except Exception as e:
-        logging.exception(f"An error occurred: {e}")
+       Returns:
+           float: The total cost of the API call, rounded to four decimal places.
+           Returns 0 if the model name is not found in the pricing dictionary.
+       """
+    if model_name not in PRICES_PER_1000_TOKEN:
+        return 0
 
+    input_price_per_1000 = PRICES_PER_1000_TOKEN[model_name]["input"]
+    output_price_per_1000 = PRICES_PER_1000_TOKEN[model_name]["output"]
 
-def get_result_word(expected: str, obtained: str):
-    """
-    Compare if expected sentence is in obtained
-    and return the result word in Streamlit format
-    """
-    if expected in obtained:
-        return ":green[success]"
-    return ":red[failed]"
+    input_cost = (input_tokens / 1000) * input_price_per_1000
+    output_cost = (output_tokens / 1000) * output_price_per_1000
+    total_cost = input_cost + output_cost
 
-
-def get_prompts_config(file_path: str):
-    """
-    Create prompts config dictionary from CSV file.
-    """
-    prompts_config_tuples = read_prompts_from_csv(file_path)
-    prompts_config = {
-        number: {
-            "prompt_template": prompt_template,
-            "options": options,
-            "instruction": instruction,
-        }
-        for number, prompt_template, options, instruction in prompts_config_tuples
-    }
-    return prompts_config
+    return round(total_cost, 4)
