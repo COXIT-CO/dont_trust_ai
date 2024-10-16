@@ -127,9 +127,7 @@ Do not make assumptions or introduce external information.
 
 ![img_2.png](/dont_trust_ai/posts/difference_in_gpt_claude_prompting/img_2.png)
 
-<div style="text-align: right;">
-<a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/multishot-prompting#example-analyzing-customer-feedback">Claude documentation</a>
-</div>
+[Claude documentation](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/multishot-prompting#example-analyzing-customer-feedback)
 
 We asked Claude to evaluate our examples on relevance, diversity and clarity.
 
@@ -175,9 +173,7 @@ In contrast, meta-prompting for GPT has not shown substantial improvements in pe
 
 ![img_3.png](/dont_trust_ai/posts/difference_in_gpt_claude_prompting/img_3.png)
 
-<div style="text-align: right;">
-<a href="https://console.anthropic.com/dashboard">Claude playground</a>
-</div>
+[Claude playground](https://console.anthropic.com/dashboard)
 
 ## 5. Formatting Prompts
 
@@ -187,14 +183,12 @@ The way prompts are formatted and segmented can affect the performance of LLMs. 
 For GPT, it is advised to specify the delimiter being used, such as “_You will be provided with a pair of articles (delimited with XML tags)._” This indicates a fundamental difference in how Claude and GPT handle prompt formatting.
 
 ![img_4.png](/dont_trust_ai/posts/difference_in_gpt_claude_prompting/img_4.png)
-<div style="text-align: right;">
-<a href="https://docs.google.com/spreadsheets/d/1jIxjzUWG-6xBVIa2ay6yDpLyeuOh_hR_ZB75a47KX_E/edit?gid=257656347#gid=257656347">Claude docs</a>
-</div>
+
+[Claude docs](https://docs.google.com/spreadsheets/d/1jIxjzUWG-6xBVIa2ay6yDpLyeuOh_hR_ZB75a47KX_E/edit?gid=257656347#gid=257656347)
 
 ![img_5.png](/dont_trust_ai/posts/difference_in_gpt_claude_prompting/img_5.png)
-<div style="text-align: right;">
-<a href="https://platform.openai.com/docs/guides/prompt-engineering/strategy-write-clear-instructions">GPT docs</a>
-</div>
+
+[GPT docs](https://platform.openai.com/docs/guides/prompt-engineering/strategy-write-clear-instructions)
 
 - **Claude**: Claude benefits from using XML tags to separate parts of the prompt, improving results:
 

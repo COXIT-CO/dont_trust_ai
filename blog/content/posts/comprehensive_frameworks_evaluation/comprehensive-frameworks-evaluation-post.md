@@ -12,22 +12,16 @@ Langsmith offers an online UI for prompt testing using either a custom dataset o
 
 ![img_1.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_1.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 1. Prompt saved in Langsmith
-</div>
 
 ![img_2.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_2.png)  
 
-<div style="text-align: right; font-style: italic;">
 Picture 2. Langsmith SDK for testing
-</div>
 
 ![img_3.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_3.png)
 ![img_3_1.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_3_1.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 3. OpenAI SDK for testing and evaluating
-</div>
 
 ### Metrics
 
@@ -35,39 +29,27 @@ Metrics are crucial for evaluating LLM performance. All three frameworks—Langs
 
 ![img_4.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_4.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 4. Default metrics in Langsmith
-</div>
 
 ![img_5.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_5.png) 
 
-<div style="text-align: right; font-style: italic;">
 Picture 5. Creating custom metrics in Langsmith
-</div>
 
 ![img_6.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_6.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 6. Default metrics in DeepEval
-</div>
 
 ![img_7.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_7.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 7. Creating custom metrics in DeepEval
-</div>
 
 ![img_8.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_8.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 8. Default metrics in OpenAI Eval
-</div>
 
 ![img_9.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_9.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 9. Creating custom metrics in OpenAI Eval
-</div>
 
 ### Conclusion on metrics
 
@@ -83,15 +65,11 @@ Langsmith can automatically collect datasets from user inputs and allow them to 
 
 ![img_10.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_10.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 10. Downloading dataset in JSONL format 
-</div>
 
 ![img_11.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_11.png)
  
-<div style="text-align: right; font-style: italic;">
 Picture 11. Importing dataset into OpenAI Evals for testing
-</div>
 
 ## Monitoring Calls
 
@@ -105,15 +83,11 @@ This allows for tracking input, output, tokens, pricing, etc. By adding the `@tr
 
 ![img_12.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_12.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 12. Monitoring call to OpenAI in Langsmith 
-</div>
 
 ![img_13.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_13.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 13. Monitoring function call in Langsmith
-</div>
 
 DeepEval, on the other hand, provides a simpler monitoring process. By sending a call to DeepEval, specifying the input, output, and other parameters, monitoring is easily achieved:
 
@@ -130,15 +104,11 @@ deepeval.monitor(
 
 ![img_14.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_14.png)
  
-<div style="text-align: right; font-style: italic;">
 Picture 14. Monitoring calls in DeepEval
-</div>
 
 ![img_15.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_15.png)
  
-<div style="text-align: right; font-style: italic;">
 Picture 15. Detailed call page in DeepEval
-</div>
 
 ## Adding New Examples to Dataset
 
@@ -146,55 +116,39 @@ In Langsmith, adding new test cases to a dataset involves selecting the required
 
 ![img_16.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_16.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 16. Selecting the required test cases in Langsmith
-</div>
 
 ![img_17.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_17.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 17. Selecting a dataset in Langsmith
-</div>
 
 ![img_18.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_18.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 18. Added test cases in dataset in Langsmith
-</div>
 
 Test cases can also be edited by modifying the `input` or `output`.
 
 ![img_19.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_19.png)
   
-<div style="text-align: right; font-style: italic;">
 Picture 19. Editing the test cases in Langsmith
-</div>
 
 In DeepEval, the process is similar, but it allows users to immediately add expected output, retrieval context, and other details. User comments and feedback are also reviewed on the same page.
 
 ![img_20.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_20.png)
   
-<div style="text-align: right; font-style: italic;">
 Picture 20. Selecting the required test cases in DeepEval  
-</div>
 
 ![img_21.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_21.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 21. Selecting a dataset in DeepEval
-</div>
 
 ![img_22.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_22.png)
  
-<div style="text-align: right; font-style: italic;">
 Picture 22. Added test cases in dataset in DeepEval
-</div>
 
 ![img_23.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_23.png)
   
-<div style="text-align: right; font-style: italic;">
 Picture 23. Editing the test cases in DeepEval
-</div>
 
 ## Collecting Human Feedback
 
@@ -227,15 +181,11 @@ def send_feedback_to_langsmith():
 
 ![img_24.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_24.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 24. Monitoring Langsmith LLM calls filtered by feedback
-</div>
 
 ![img_25.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_25.png)
  
-<div style="text-align: right; font-style: italic;">
 Picture 25. Detail feedback page in Langsmith
-</div>
 
 In DeepEval, the response ID is returned as a result of the `deepeval.monitor` function, and this ID is used for feedback tracking:
 
@@ -253,16 +203,12 @@ return llm_response, response_id
 
 ![img_26.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_26.png)  
 
-<div style="text-align: right; font-style: italic;">
 Picture 26. Monitoring DeepEval LLM calls filtered by feedback
-</div>
 
 
 ![img_27.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_27.png) 
 
-<div style="text-align: right; font-style: italic;">
 Picture 27. Detail feedback page in DeepEval
-</div>
 
 ## Pricing
 
@@ -270,17 +216,13 @@ Picture 27. Detail feedback page in DeepEval
 
 ![img.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_28.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 28. LangSmith Pricing
-</div>
 
 ### DeepEval Pricing
 
 ![img.png](/dont_trust_ai/posts/comprehensive_frameworks_evaluation/img_29.png)
 
-<div style="text-align: right; font-style: italic;">
 Picture 29. DeepEval Pricing
-</div>
 
 ## Overall Conclusion
 

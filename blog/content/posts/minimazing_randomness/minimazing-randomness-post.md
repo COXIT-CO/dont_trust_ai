@@ -42,27 +42,17 @@ Output:
 
 ![img_2.png](/dont_trust_ai/posts/minimazing_randomness/img_2.png)
 
-<div style="text-align: right; font-style: italic;">
-<a href="https://docs.google.com/spreadsheets/d/1Y89Ga7uMHcSwVp0T4tqsBT4xwPSrb_8pjLL9A3ECtV4/edit?usp=sharing">
-First call
-</a>
-</div>
+
+[First call](https://docs.google.com/spreadsheets/d/1Y89Ga7uMHcSwVp0T4tqsBT4xwPSrb_8pjLL9A3ECtV4/edit?usp=sharing)
+
 
 ![img_3.png](/dont_trust_ai/posts/minimazing_randomness/img_3.png)
 
-<div style="text-align: right; font-style: italic;">
-<a href="https://docs.google.com/spreadsheets/d/1Y89Ga7uMHcSwVp0T4tqsBT4xwPSrb_8pjLL9A3ECtV4/edit?gid=482158444#gid=482158444">
-Second call
-</a>
-</div>
+[Second call](https://docs.google.com/spreadsheets/d/1Y89Ga7uMHcSwVp0T4tqsBT4xwPSrb_8pjLL9A3ECtV4/edit?gid=482158444#gid=482158444)
 
 ![img_4.png](/dont_trust_ai/posts/minimazing_randomness/img_4.png)
 
-<div style="text-align: right; font-style: italic;">
-<a href="https://docs.google.com/spreadsheets/d/1Y89Ga7uMHcSwVp0T4tqsBT4xwPSrb_8pjLL9A3ECtV4/edit?gid=1411585284#gid=1411585284">
-Third call
-</a>
-</div>
+[Third call](https://docs.google.com/spreadsheets/d/1Y89Ga7uMHcSwVp0T4tqsBT4xwPSrb_8pjLL9A3ECtV4/edit?gid=1411585284#gid=1411585284)
 
 The same call to Claude(**_claude-3.5-sonnet-2024-06-20_**) gave three identical response for 3 calls:
 
@@ -90,15 +80,11 @@ completion = client.chat.completions.create(
 
 ![img_6.png](/dont_trust_ai/posts/minimazing_randomness/img_6.png)
 
-<div style="text-align: right; font-style: italic;">
 First call
-</div>
 
 ![img_7.png](/dont_trust_ai/posts/minimazing_randomness/img_7.png)
 
-<div style="text-align: right; font-style: italic;">
 Second and Third calls
-</div>
 
 ### Conclusion: 
 As demonstrated by the testing results above, setting the temperature or top_p to zero and utilizing a fixed seed do not guarantee determinism in model responses. The key factor influencing the outcome lies in the vector mathematics employed during the token selection process ([espesially in Third Layer of token generation : Beam Search with Randomness](https://neuralgap.io/understanding-randomness-within-llms-neuralgap/#:~:text=Layer%203%3A%20Beam%20Search%20with%20Randomness)). This process of selecting tokens can be compared to Dijkstra’s algorithm. While traditional algorithms like Dijkstra’s evaluate all possible paths to ensure an optimal solution, LLMs do not exhaustively explore every potential token combination. This would indeed lead to significantly slower response times. Instead, LLMs prioritize computational efficiency by selecting highly probable tokens based on contextual patterns, which sometimes results in variability across responses. LLM doesn’t check all possible solutions to find the best one but generates outputs that are likely correct, because of that, we can see different result series to the same input cabinet specification. As a result, the model may produce slightly different answers with each invocation, driven by its focus on optimizing computational resources while balancing accuracy.
@@ -137,21 +123,15 @@ completion = await client.chat.completions.create(
 ```
 ![img_8.png](/dont_trust_ai/posts/minimazing_randomness/img_8.png)
 
-<div style="text-align: right; font-style: italic;">
 First call
-</div>
 
 ![img_9.png](/dont_trust_ai/posts/minimazing_randomness/img_9.png)
 
-<div style="text-align: right; font-style: italic;">
 Second call
-</div>
 
 ![img_10.png](/dont_trust_ai/posts/minimazing_randomness/img_10.png)
 
-<div style="text-align: right; font-style: italic;">
 Third call
-</div>
 
 ## 4. Temperature and Top_p: Avoid Using Together
 
