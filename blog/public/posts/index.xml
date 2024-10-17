@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on LLM Integrations Research Blog by COXIT</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on LLM Integrations Research Blog by COXIT</description>
+    <generator>Hugo -- 0.135.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 10 Oct 2024 19:19:14 +0300</lastBuildDate>
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Welcome To LLM Integrations Research Blog by COXIT</title>
+      <link>http://localhost:1313/posts/my-first-post/</link>
+      <pubDate>Thu, 10 Oct 2024 19:19:14 +0300</pubDate>
+      <guid>http://localhost:1313/posts/my-first-post/</guid>
+      <description>&lt;h3 id=&#34;welcome&#34;&gt;Welcome&lt;/h3&gt;
+&lt;p&gt;Welcome to the internal COXIT blog about Prompt Engeneering and LLM integrations.&lt;/p&gt;
+&lt;p&gt;This is COXIT&amp;rsquo;s internal R&amp;amp;D project. We aim to investigate different tools, approaches, and prompt engineering techniques for building LLM-powered production-ready solutions. We aim to try different tools currently known on the market and define what works and what causes any problems for our specific use cases.&lt;/p&gt;
+&lt;p&gt;As a result of this project, we will build a knowledge base describing which of the available LLM evaluation tools, frameworks, LLMs themselves, and prompt engineering techniques worked best for our specific LLM-related cases, explain what didn&amp;rsquo;t work, and why.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
