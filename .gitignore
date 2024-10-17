@@ -1,0 +1,8 @@
+.venv
+.idea
+.env
+.pycache
+__pycache__/
+logs
+results
+*.csv
