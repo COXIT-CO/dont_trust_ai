@@ -1,6 +1,6 @@
 +++
 title = 'Welcome To LLM Integrations Research Blog by COXIT'
-date = 2024-10-10T19:19:14+03:00
+date = 2024-10-15T13:45:14+03:00
 draft = false
 author = 'Iryna Mykytyn'
 +++
@@ -22,6 +22,7 @@ hugo server -D
 ```
 
 ### Tech Stack
+
 
 This blog is powered by [hugo](https://gohugo.io/) + github actions + github pages. 
 

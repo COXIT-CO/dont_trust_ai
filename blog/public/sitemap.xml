@@ -3,13 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2024-10-10T19:19:14+03:00</lastmod>
+    <lastmod>2024-10-15T13:45:14+03:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-10-10T19:19:14+03:00</lastmod>
+    <lastmod>2024-10-15T13:45:14+03:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/my-first-post/</loc>
-    <lastmod>2024-10-10T19:19:14+03:00</lastmod>
+    <lastmod>2024-10-15T13:45:14+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/minimazing_randomness/minimazing-randomness-post/</loc>
+    <lastmod>2024-10-15T13:09:30+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/difference_in_gpt_claude_prompting/difference-in-prompting-post/</loc>
+    <lastmod>2024-10-15T11:29:11+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/comprehensive_frameworks_evaluation/comprehensive-frameworks-evaluation-post/</loc>
+    <lastmod>2024-10-14T12:35:30+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/experiments_with_different_llms/experiments-with-different-llms-post/</loc>
+    <lastmod>2024-10-11T14:06:39+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/prompt_engineering/prompt-engineering-post/</loc>
+    <lastmod>2024-10-10T11:59:14+03:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
   </url><url>
