@@ -81,7 +81,7 @@ This step will let us facilitate experts in sharing their knowledge, but it shou
 - **Base Prompts**: Admin and Prompt Engineer will need to work together to create an Instruction.
 Instruction is the core of the Prompt. Here is an example of a Prompt template:
 
-    ![img_11.png]/dont_trust_ai/posts/bidrequest_solution_proposal/img_11.png)
+    ![img_11.png](/dont_trust_ai/posts/bidrequest_solution_proposal/img_11.png)
 
     Base Prompt is a prompt which gives at least 80% precision on Basic Data Set
     The proposed path is to start from building 2-3 Basic Prompts to extract data for a few BidRequest blocks. For example, to mine data blocks separately for Series, Fronts, and Cabinet Box.
